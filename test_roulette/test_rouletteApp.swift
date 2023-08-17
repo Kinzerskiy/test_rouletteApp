@@ -11,7 +11,7 @@ import SwiftUI
 struct test_rouletteApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RouletteWheelView()
         }
     }
 }

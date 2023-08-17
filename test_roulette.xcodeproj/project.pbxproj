@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8EB19BE22A8E251700422FAE /* test_rouletteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */; };
-		8EB19BE42A8E251700422FAE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE32A8E251700422FAE /* ContentView.swift */; };
+		8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */; };
 		8EB19BE62A8E251D00422FAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE52A8E251D00422FAE /* Assets.xcassets */; };
 		8EB19BE92A8E251D00422FAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		8EB19BDE2A8E251700422FAE /* test_roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_roulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_rouletteApp.swift; sourceTree = "<group>"; };
-		8EB19BE32A8E251700422FAE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteWheelView.swift; sourceTree = "<group>"; };
 		8EB19BE52A8E251D00422FAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */,
-				8EB19BE32A8E251700422FAE /* ContentView.swift */,
+				8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */,
 				8EB19BE52A8E251D00422FAE /* Assets.xcassets */,
 				8EB19BE72A8E251D00422FAE /* Preview Content */,
 			);
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EB19BE42A8E251700422FAE /* ContentView.swift in Sources */,
+				8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */,
 				8EB19BE22A8E251700422FAE /* test_rouletteApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
