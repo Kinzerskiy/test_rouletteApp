@@ -8,13 +8,14 @@
 import Foundation
 
 class BetManager: ObservableObject {
+    
     @Published var activeBets: [ActiveBet] = []
     
     func toggleBet(type: BetType) {
         if let existingBetIndex = activeBets.firstIndex(where: { $0.type == type }) {
             activeBets.remove(at: existingBetIndex)
         } else {
-            let betAmount = 10.0 // просто пример, здесь можно добавить дополнительную логику
+            let betAmount = 10.0
             let bet = ActiveBet(type: type, amount: betAmount)
             activeBets.append(bet)
         }
@@ -33,7 +34,7 @@ class BetManager: ObservableObject {
         case 2:
             return .third12
         default:
-            return .number(-1)  // не должно случиться
+            return .number(-1)
         }
     }
     

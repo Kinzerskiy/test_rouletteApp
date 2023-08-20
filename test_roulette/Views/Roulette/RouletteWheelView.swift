@@ -9,8 +9,7 @@ import SwiftUI
 
 struct RouletteWheelView: View {
     
-    @ObservedObject var model = RouletteModel()
-    
+    @ObservedObject var model = RouletteViewModel()
     
     var body: some View {
         GeometryReader { geometry in
@@ -34,9 +33,10 @@ struct RouletteWheelView: View {
                     
                     Text("\(number)")
                         .foregroundColor((index == model.activeIndex && index == model.finalIndex && !model.spinning) ? .green : .white)
-                        
+                    
                         .rotationEffect(Angle(degrees: 180))
-
+                        .font(.system(size: 10))
+                    
                         .position(
                             x: geometry.size.width / 2 + (geometry.size.width/2.5) * CGFloat(cos(offsetAngle)),
                             y: geometry.size.height / 2 + (geometry.size.height/2.5) * CGFloat(sin(offsetAngle))
@@ -45,17 +45,17 @@ struct RouletteWheelView: View {
                 }
                 
                 Circle()
-                    .fill(Color.cyan)
+                    .fill(Color.blue)
                     .frame(width: geometry.size.width / 1.5, height: geometry.size.height)
             }
             .rotationEffect(Angle(degrees: model.wheelRotation))
             
             Button("Start") {
                 model.startSpinning()
-                        }
-                        .padding(.bottom, 30)
-                    }
-                    .aspectRatio(1, contentMode: .fit)
+            }
+            .padding(.bottom, 30)
+        }
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 

@@ -8,22 +8,43 @@
 
 /* Begin PBXBuildFile section */
 		8E5D30B22A8FA09B00701A58 /* CombinedRouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30B12A8FA09B00701A58 /* CombinedRouletteView.swift */; };
-		8E5D30B62A8FA96E00701A58 /* BettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30B52A8FA96E00701A58 /* BettingModel.swift */; };
+		8E5D30B62A8FA96E00701A58 /* BettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30B52A8FA96E00701A58 /* BettingManager.swift */; };
 		8E5D30B82A8FB7FA00701A58 /* BetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30B72A8FB7FA00701A58 /* BetManager.swift */; };
+		8E5D30BE2A90B20D00701A58 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30BD2A90B20D00701A58 /* AppUser.swift */; };
+		8E5D30C22A90CA2D00701A58 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30C12A90CA2D00701A58 /* AuthView.swift */; };
+		8E5D30C42A90CC9C00701A58 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */; };
+		8E69380A2A9257C100CE7972 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6938092A9257C000CE7972 /* MainNavigationView.swift */; };
+		8E69380D2A92627D00CE7972 /* NavigationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69380C2A92627C00CE7972 /* NavigationObject.swift */; };
+		8E694EFF2A91006E005537A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */; };
 		8E6CFA1D2A8F5B3800DE93A0 /* RouletteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */; };
-		8E7E64D12A8F5FB9001DE0FC /* RouletteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E64D02A8F5FB9001DE0FC /* RouletteModel.swift */; };
+		8E7E64D12A8F5FB9001DE0FC /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */; };
+		8E898F852A910A16007D4B5A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E898F842A910A16007D4B5A /* SettingsView.swift */; };
+		8E898F872A910CB9007D4B5A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E898F862A910CB9007D4B5A /* SettingsViewModel.swift */; };
 		8EB19BE22A8E251700422FAE /* test_rouletteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */; };
 		8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */; };
 		8EB19BE62A8E251D00422FAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE52A8E251D00422FAE /* Assets.xcassets */; };
 		8EB19BE92A8E251D00422FAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */; };
+		CB3A4D75CA34C07B2A4E1500 /* Pods_test_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8962E7572F0E371B479D7553 /* Pods_test_roulette.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		50088105E79337CD7168F0EA /* Pods-test_roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_roulette.release.xcconfig"; path = "Target Support Files/Pods-test_roulette/Pods-test_roulette.release.xcconfig"; sourceTree = "<group>"; };
+		64B238062ABB11962D1A3D91 /* Pods-test_roulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test_roulette.debug.xcconfig"; path = "Target Support Files/Pods-test_roulette/Pods-test_roulette.debug.xcconfig"; sourceTree = "<group>"; };
+		8962E7572F0E371B479D7553 /* Pods_test_roulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test_roulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E5D30B12A8FA09B00701A58 /* CombinedRouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedRouletteView.swift; sourceTree = "<group>"; };
-		8E5D30B52A8FA96E00701A58 /* BettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BettingModel.swift; sourceTree = "<group>"; };
+		8E5D30B52A8FA96E00701A58 /* BettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BettingManager.swift; sourceTree = "<group>"; };
 		8E5D30B72A8FB7FA00701A58 /* BetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetManager.swift; sourceTree = "<group>"; };
+		8E5D30BD2A90B20D00701A58 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		8E5D30C12A90CA2D00701A58 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		8E6938092A9257C000CE7972 /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
+		8E69380C2A92627C00CE7972 /* NavigationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationObject.swift; sourceTree = "<group>"; };
+		8E694EFB2A90F438005537A3 /* test-roulette-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "test-roulette-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteTableView.swift; sourceTree = "<group>"; };
-		8E7E64D02A8F5FB9001DE0FC /* RouletteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteModel.swift; sourceTree = "<group>"; };
+		8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewModel.swift; sourceTree = "<group>"; };
+		8E898F842A910A16007D4B5A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		8E898F862A910CB9007D4B5A /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		8EB19BDE2A8E251700422FAE /* test_roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_roulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test_rouletteApp.swift; sourceTree = "<group>"; };
 		8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteWheelView.swift; sourceTree = "<group>"; };
@@ -36,17 +57,78 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB3A4D75CA34C07B2A4E1500 /* Pods_test_roulette.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0615E31BEB6C38FD78EECDCA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				64B238062ABB11962D1A3D91 /* Pods-test_roulette.debug.xcconfig */,
+				50088105E79337CD7168F0EA /* Pods-test_roulette.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8E5D30B92A8FC8CA00701A58 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E5D30BC2A90B0F800701A58 /* Roulette */,
+				8E5D30C12A90CA2D00701A58 /* AuthView.swift */,
+				8E898F842A910A16007D4B5A /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8E5D30BA2A8FC8E100701A58 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */,
+				8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */,
+				8E898F862A910CB9007D4B5A /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8E5D30BB2A8FC8EF00701A58 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				8E69380C2A92627C00CE7972 /* NavigationObject.swift */,
+				8E5D30B52A8FA96E00701A58 /* BettingManager.swift */,
+				8E5D30B72A8FB7FA00701A58 /* BetManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		8E5D30BC2A90B0F800701A58 /* Roulette */ = {
+			isa = PBXGroup;
+			children = (
+				8E5D30B12A8FA09B00701A58 /* CombinedRouletteView.swift */,
+				8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */,
+				8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */,
+				8E6938092A9257C000CE7972 /* MainNavigationView.swift */,
+			);
+			path = Roulette;
+			sourceTree = "<group>";
+		};
+		8E5D30C52A90CDBB00701A58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8E5D30BD2A90B20D00701A58 /* AppUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8EB19BD52A8E251700422FAE = {
 			isa = PBXGroup;
 			children = (
 				8EB19BE02A8E251700422FAE /* test_roulette */,
 				8EB19BDF2A8E251700422FAE /* Products */,
+				0615E31BEB6C38FD78EECDCA /* Pods */,
+				F07C9382918BFB534B76D977 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,13 +143,13 @@
 		8EB19BE02A8E251700422FAE /* test_roulette */ = {
 			isa = PBXGroup;
 			children = (
+				8E694EFB2A90F438005537A3 /* test-roulette-Info.plist */,
+				8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */,
 				8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */,
-				8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */,
-				8E5D30B12A8FA09B00701A58 /* CombinedRouletteView.swift */,
-				8E7E64D02A8F5FB9001DE0FC /* RouletteModel.swift */,
-				8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */,
-				8E5D30B72A8FB7FA00701A58 /* BetManager.swift */,
-				8E5D30B52A8FA96E00701A58 /* BettingModel.swift */,
+				8E5D30C52A90CDBB00701A58 /* Models */,
+				8E5D30BA2A8FC8E100701A58 /* ViewModels */,
+				8E5D30B92A8FC8CA00701A58 /* Views */,
+				8E5D30BB2A8FC8EF00701A58 /* Managers */,
 				8EB19BE52A8E251D00422FAE /* Assets.xcassets */,
 				8EB19BE72A8E251D00422FAE /* Preview Content */,
 			);
@@ -82,6 +164,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		F07C9382918BFB534B76D977 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8962E7572F0E371B479D7553 /* Pods_test_roulette.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,15 +179,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8EB19BEC2A8E251D00422FAE /* Build configuration list for PBXNativeTarget "test_roulette" */;
 			buildPhases = (
+				5FC0FA0D8C6E9B95E492A43B /* [CP] Check Pods Manifest.lock */,
 				8EB19BDA2A8E251700422FAE /* Sources */,
 				8EB19BDB2A8E251700422FAE /* Frameworks */,
 				8EB19BDC2A8E251700422FAE /* Resources */,
+				54F8FA9BD28153503EDD5FA4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = test_roulette;
+			packageProductDependencies = (
+			);
 			productName = test_roulette;
 			productReference = 8EB19BDE2A8E251700422FAE /* test_roulette.app */;
 			productType = "com.apple.product-type.application";
@@ -126,6 +220,8 @@
 				Base,
 			);
 			mainGroup = 8EB19BD52A8E251700422FAE;
+			packageReferences = (
+			);
 			productRefGroup = 8EB19BDF2A8E251700422FAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -142,23 +238,73 @@
 			files = (
 				8EB19BE92A8E251D00422FAE /* Preview Assets.xcassets in Resources */,
 				8EB19BE62A8E251D00422FAE /* Assets.xcassets in Resources */,
+				8E694EFF2A91006E005537A3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		54F8FA9BD28153503EDD5FA4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-test_roulette/Pods-test_roulette-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-test_roulette/Pods-test_roulette-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-test_roulette/Pods-test_roulette-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FC0FA0D8C6E9B95E492A43B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-test_roulette-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8EB19BDA2A8E251700422FAE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E5D30C42A90CC9C00701A58 /* AuthViewModel.swift in Sources */,
 				8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */,
 				8EB19BE22A8E251700422FAE /* test_rouletteApp.swift in Sources */,
-				8E5D30B62A8FA96E00701A58 /* BettingModel.swift in Sources */,
+				8E5D30B62A8FA96E00701A58 /* BettingManager.swift in Sources */,
 				8E6CFA1D2A8F5B3800DE93A0 /* RouletteTableView.swift in Sources */,
+				8E5D30BE2A90B20D00701A58 /* AppUser.swift in Sources */,
+				8E69380D2A92627D00CE7972 /* NavigationObject.swift in Sources */,
 				8E5D30B82A8FB7FA00701A58 /* BetManager.swift in Sources */,
 				8E5D30B22A8FA09B00701A58 /* CombinedRouletteView.swift in Sources */,
-				8E7E64D12A8F5FB9001DE0FC /* RouletteModel.swift in Sources */,
+				8E69380A2A9257C100CE7972 /* MainNavigationView.swift in Sources */,
+				8E7E64D12A8F5FB9001DE0FC /* RouletteViewModel.swift in Sources */,
+				8E5D30C22A90CA2D00701A58 /* AuthView.swift in Sources */,
+				8E898F852A910A16007D4B5A /* SettingsView.swift in Sources */,
+				8E898F872A910CB9007D4B5A /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +361,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -269,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -281,6 +427,7 @@
 		};
 		8EB19BED2A8E251D00422FAE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64B238062ABB11962D1A3D91 /* Pods-test_roulette.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,10 +437,12 @@
 				DEVELOPMENT_TEAM = N2LF8DTSP7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "test-roulette-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,6 +458,7 @@
 		};
 		8EB19BEE2A8E251D00422FAE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50088105E79337CD7168F0EA /* Pods-test_roulette.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,10 +468,12 @@
 				DEVELOPMENT_TEAM = N2LF8DTSP7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "test-roulette-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

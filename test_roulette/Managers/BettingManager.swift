@@ -1,5 +1,5 @@
 //
-//  BettingModel.swift
+//  BettingManager.swift
 //  test_roulette
 //
 //  Created by Mac Pro on 18.08.2023.
@@ -22,7 +22,7 @@ struct ActiveBet: Identifiable {
     var amount: Double
 }
 
-class BettingModel: ObservableObject {
+class BettingManager: ObservableObject {
     
     @Published var balance: Double = 10000.0
     @Published var betAmount: Double = 0.0
@@ -40,7 +40,6 @@ class BettingModel: ObservableObject {
             balance -= betAmount
         }
 
-        // Reset the bet
         betNumber = nil
         betAmount = 0.0
     }

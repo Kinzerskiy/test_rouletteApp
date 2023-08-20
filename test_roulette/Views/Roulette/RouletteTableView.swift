@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RouletteTableView: View {
     @State private var activeBets: [ActiveBet] = []
-    @ObservedObject var model = RouletteModel()
+    @ObservedObject var model = RouletteViewModel()
     @ObservedObject var betManager = BetManager()
     
     var body: some View {
@@ -29,7 +29,7 @@ struct RouletteTableView: View {
     
     var zeroCell: some View {
         Rectangle()
-            .frame(width: 40, height: 120)
+            .frame(width: 40, height: 122)
             .foregroundColor(model.activeIndex == 0 ? .white : model.color(for: 0))
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
     }
@@ -41,13 +41,13 @@ struct RouletteTableView: View {
                     ForEach(1..<13) { columnIndex in
                         let number = (columnIndex - 1) * 3 + rowIndex
                         let isHighlighted = model.activeIndex == number
-                        let isNumberInList = [32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3].contains(number)
+                        let isNumberInList = model.wheelOrder.contains(number)
                         
                         Rectangle()
                             .frame(width: 40, height: 40)
                             .foregroundColor(betManager.isBetActive(.number(number)) ? .yellow : isHighlighted && !model.spinning ? .white : (isHighlighted && model.spinning && isNumberInList ? .white : model.color(for: number)))
                             .overlay(Text("\(number)")
-                                .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
+                            .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
                             .onTapGesture { betManager.toggleBet(type: .number(number))
                             }
                     }
@@ -56,12 +56,12 @@ struct RouletteTableView: View {
             }
         }
     }
-
+    
     var sideCells: some View {
         VStack(spacing: 1) {
             ForEach(1..<4) { _ in
                 Rectangle()
-                    .frame(width: 40, height: 40)
+                    .frame(width: 60, height: 40)
                     .foregroundColor(.gray)
                     .overlay(Text("2 - 1").foregroundColor(.white))
             }
@@ -70,7 +70,7 @@ struct RouletteTableView: View {
     
     
     
-
+    
     var horizontalCells: some View {
         HStack(spacing: 1) {
             Spacer()
@@ -91,7 +91,7 @@ struct RouletteTableView: View {
                             }
                     }
                 }
-                                
+                
                 HStack(spacing: 1) {
                     ForEach(0..<6) { index in
                         Rectangle()
@@ -112,8 +112,8 @@ struct RouletteTableView: View {
                 .frame(width: 40)
         }
     }
-
-
+    
+    
     
     
     
