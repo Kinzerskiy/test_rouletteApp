@@ -9,23 +9,31 @@ import SwiftUI
 
 struct CombinedRouletteView: View {
     
-    @ObservedObject var model = RouletteViewModel()
-    @ObservedObject var authViewModel = AuthViewModel()
+    @ObservedObject var authViewModel: AuthViewModel
+    @ObservedObject var betViewModel: BetViewModel
+    @ObservedObject var model: RouletteViewModel
     
     @Binding var path: NavigationPath
     
+    init(path: Binding<NavigationPath>) {
+        let authVM = AuthViewModel()
+        let betVM = BetViewModel()
+        
+        self.authViewModel = authVM
+        self.betViewModel = betVM
+        
+        self.model = RouletteViewModel(betViewModel: betVM, authViewModel: authVM)
+        _path = path
+    }
+    
     var body: some View {
         GeometryReader { geometry in
-            
             HStack(alignment: .center) {
-                
-                RouletteTableView(model: model)
+                RouletteTableView(authViewModel: AuthViewModel())
                     .rotationEffect(.degrees(90))
                     .frame(width: geometry.size.height * 0.3)
                     .offset(x: geometry.size.width * 0.22 - geometry.size.height * 0.11)
                     .padding(3)
-                
-                
                 
                 VStack {
                     RouletteWheelView(model: model)
@@ -33,7 +41,7 @@ struct CombinedRouletteView: View {
                         .frame(width: geometry.size.height * 0.2)
                         .padding(.bottom, 30)
                     
-                    BetView(authViewModel: authViewModel)
+                    BetView(authViewModel: authViewModel, betAmount: 10)
                         .rotationEffect(.degrees(90))
                         .frame(width: geometry.size.height * 0.3)
                         .padding(.top, 60)
@@ -42,6 +50,7 @@ struct CombinedRouletteView: View {
                     
                     Button(action: {
                         model.startSpinning()
+                        
                     }) {
                         Text("Start")
                             .padding()
@@ -59,7 +68,6 @@ struct CombinedRouletteView: View {
         }
     }
 }
-
 
 struct CombinedRouletteView_Previews: PreviewProvider {
     static var previews: some View {

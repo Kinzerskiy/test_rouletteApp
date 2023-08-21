@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct RouletteTableView: View {
-    
-    
-    @ObservedObject var model = RouletteViewModel()
-    
-    
+
+    @ObservedObject var model = RouletteViewModel(betViewModel: BetViewModel(), authViewModel: AuthViewModel())
+    @ObservedObject var authViewModel: AuthViewModel
+  
     var body: some View {
         VStack(spacing: 1) {
             mainBoard
@@ -31,8 +30,13 @@ struct RouletteTableView: View {
     var zeroCell: some View {
         Rectangle()
             .frame(width: 40, height: 122)
-            .foregroundColor(model.activeIndex == 0 ? .white : model.color(for: 0))
+            .foregroundColor(model.selectedBetType == .number(0) ? .gray : model.color(for: 0))
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
+            .onTapGesture {
+                model.betViewModel.resetBet()
+                model.selectedBetType = nil
+                model.selectBetType(.number(0))
+            }
     }
     
     var numbersBoard: some View {
@@ -46,8 +50,22 @@ struct RouletteTableView: View {
                         Rectangle()
                             .frame(width: 40, height: 40)
                             .foregroundColor(model.color(for: number))
+                            .opacity(model.selectedNumber == number ? 0.5 : 1.0)
                             .overlay(Text("\(number)")
                                 .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
+                        
+                            
+                            .onTapGesture {
+                                model.betViewModel.resetBet()
+                                model.selectedBetType = nil
+                                if model.selectedNumber == number {
+                                     model.selectedNumber = nil
+                                 } else {
+                                     
+                                     model.isNumberSelected = true
+                                     model.selectedNumber = number
+                                 }
+                            }
                     }
                 }
             }
@@ -56,11 +74,18 @@ struct RouletteTableView: View {
     
     var sideCells: some View {
         VStack(spacing: 1) {
-            ForEach(1..<4) { _ in
+            ForEach(1..<4) { index in
                 Rectangle()
                     .frame(width: 60, height: 40)
-                    .foregroundColor(.gray)
+                    .foregroundColor(model.selectedBetType == [.firstLine, .secondLine, .thirdLine][index - 1] ? .red : .gray)
                     .overlay(Text("2 - 1").foregroundColor(.white))
+                    .onTapGesture {
+                        model.selectedNumber = nil
+                        model.selectedBetType = nil
+                        model.betViewModel.resetBet()
+                        
+                        model.selectBetType([.firstLine, .secondLine, .thirdLine][index - 1])
+                    }
             }
         }
     }
@@ -75,11 +100,17 @@ struct RouletteTableView: View {
                     ForEach(0..<3) { index in
                         Rectangle()
                             .frame(width: (40 * 12 + 10) / 3, height: 40)
-                            .foregroundColor(.gray)
+                            .foregroundColor(model.selectedBetType == [.firstThird, .secondThird, .thirdThird][index] ? .red : .gray)
                             .overlay(
                                 Text(sectionText(for: index))
                                     .foregroundColor(.white)
                             )
+                            .onTapGesture {
+                                model.betViewModel.resetBet()
+                                model.selectedNumber = nil
+                                model.selectedBetType = nil
+                                model.selectBetType([.firstThird, .secondThird, .thirdThird][index])
+                            }
                     }
                 }
                 
@@ -87,11 +118,18 @@ struct RouletteTableView: View {
                     ForEach(0..<6) { index in
                         Rectangle()
                             .frame(width: (40 * 12 + 7) / 6, height: 40)
-                            .foregroundColor(.gray)
+                            
+                            .foregroundColor(model.selectedBetType == [.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index] ? .red : .gray)
                             .overlay(
                                 Text(lowerSectionText(for: index))
                                     .foregroundColor(.white)
                             )
+                            .onTapGesture {
+                                model.betViewModel.resetBet()
+                                model.selectedNumber = nil
+                                model.selectedBetType = nil
+                                model.selectBetType([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
+                            }
                     }
                 }
             }
@@ -100,9 +138,6 @@ struct RouletteTableView: View {
                 .frame(width: 40)
         }
     }
-    
-    
-    
     
     
     func sectionText(for index: Int) -> String {
@@ -142,7 +177,7 @@ struct RouletteTableView: View {
 
 struct RouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteTableView()
+        RouletteTableView(authViewModel: AuthViewModel())
     }
 }
 

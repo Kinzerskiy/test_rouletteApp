@@ -23,22 +23,52 @@ enum SpinDirection {
 
 class RouletteViewModel: ObservableObject {
     
-    @Published var activeIndex: Int? = nil
+    @Published var activeIndex: Int?
     @Published var finalIndex: Int? = nil
-    
     @Published var spinning: Bool = false
     @Published var rotationCount: Int = 10
     @Published var maxRotations: Int = Int.random(in: 2...5)
     @Published var wheelRotation: Double = 0.0
     @Published var spinDirection: SpinDirection = .clockwise
+    @Published var resultMessage: String = ""
+    @Published var showResultAlert: Bool = false
+    @Published var isNumberSelected: Bool = false
+    @Published var selectedNumber: Int? = nil
+    @Published var selectedBetType: BetType? = nil
+
     
     
-    let wheelOrder: [Int] = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26]
+    var betViewModel: BetViewModel
+    var authViewModel: AuthViewModel
+    
+    init(betViewModel: BetViewModel, authViewModel: AuthViewModel) {
+        self.betViewModel = betViewModel
+        self.authViewModel = authViewModel
+    }
+    
+    let wheelOrder: [Int] = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20 , 14, 31, 9, 22, 18, 29, 7, 28,12, 35, 3, 26]
+    
+    func selectBetType(_ betType: BetType) {
+        if selectedBetType == betType {
+            selectedBetType = nil
+            betViewModel.resetBet()
+        } else {
+            betViewModel.bet(amount: betViewModel.betAmount ?? 0, betType: betType)
+            isNumberSelected = true
+            selectedBetType = betType
+        }
+    }
+    
+    
     
     func spinWheel() {
         if rotationCount >= maxRotations && activeIndex == finalIndex {
             spinning = false
-            return
+            if let result = finalIndex {
+                let winAmount = betViewModel.calculateResult(result: result)
+                
+                return
+            }
         }
         
         if spinning {
@@ -54,7 +84,6 @@ class RouletteViewModel: ObservableObject {
                 
                 activeIndex = (spinDirection == .clockwise ? (activeIndex! + 1) : (activeIndex! - 1 + wheelOrder.count)) % wheelOrder.count
                 wheelRotation += (spinDirection == .clockwise ? 1 : -1) * (360.0 / Double(wheelOrder.count))
-                
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) {
@@ -63,16 +92,41 @@ class RouletteViewModel: ObservableObject {
         }
     }
     
+    func endSpinning() {
+            guard let finalIndex = activeIndex else { return }
+            let result = betViewModel.calculateResult(result: finalIndex)
+            
+            if var appUser = authViewModel.appUser {
+               
+                appUser.coins += result
+                authViewModel.updateUserData(user: appUser)
+            }
+        }
+
+    
     func startSpinning() {
         if !spinning {
-            spinning = true
-            rotationCount = 0
-            maxRotations = Int.random(in: 3...5)
-            finalIndex = Int.random(in: 1...36)
-            activeIndex = Int.random(in: wheelOrder.indices)
-            spinWheel()
+            if !spinning {
+                spinning = true
+                rotationCount = 0
+                maxRotations = Int.random(in: 3...5)
+                finalIndex = Int.random(in: 1...36)
+                activeIndex = Int.random(in: wheelOrder.indices)
+                spinWheel()
+                
+                let resultColor = color(for: finalIndex!)
+                if resultColor == .red {
+                    resultMessage = "The ball landed on red!"
+                } else if resultColor == .black {
+                    resultMessage = "The ball landed on black!"
+                } else {
+                    resultMessage = "The ball landed on green!"
+                }
+                showResultAlert = true
+            }
             
             spinDirection.toggle()
+            
         }
     }
     
@@ -81,7 +135,7 @@ class RouletteViewModel: ObservableObject {
         switch number {
         case 0:
             return .green
-        case 32, 19, 21, 25, 34, 27, 36, 30, 23, 5, 16, 1, 14, 9, 18, 7, 12, 3:
+        case 1, 3, 5, 7, 9, 12, 14, 16, 18, 21, 23, 25, 27, 28, 30, 32, 34, 36 :
             return .red
         default:
             return .black
