@@ -17,12 +17,9 @@ struct CombinedRouletteView: View {
     
     init(path: Binding<NavigationPath>) {
         let authVM = AuthViewModel()
-        let betVM = BetViewModel()
-        
         self.authViewModel = authVM
-        self.betViewModel = betVM
-        
-        self.model = RouletteViewModel(betViewModel: betVM, authViewModel: authVM)
+        self.betViewModel = BetViewModel.shared
+        self.model = RouletteViewModel(authViewModel: authVM)
         _path = path
     }
     
@@ -41,7 +38,7 @@ struct CombinedRouletteView: View {
                         .frame(width: geometry.size.height * 0.2)
                         .padding(.bottom, 30)
                     
-                    BetView(authViewModel: authViewModel, betAmount: 10)
+                    BetView(authViewModel: authViewModel, betAmount:  BetViewModel.shared.betAmount ?? 0)
                         .rotationEffect(.degrees(90))
                         .frame(width: geometry.size.height * 0.3)
                         .padding(.top, 60)

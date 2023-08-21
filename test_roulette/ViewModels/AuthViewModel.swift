@@ -168,7 +168,7 @@ final class AuthViewModel: ObservableObject {
             "coins": user.coins
         ]
         
-       
+        print("Trying to update data for \(user.uuid)...")
         userDocRef.updateData(valuesToUpdate) { error in
             if let error = error {
                 print("Error updating user data: \(error.localizedDescription)")

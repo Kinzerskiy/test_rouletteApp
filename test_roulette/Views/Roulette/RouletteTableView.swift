@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RouletteTableView: View {
 
-    @ObservedObject var model = RouletteViewModel(betViewModel: BetViewModel(), authViewModel: AuthViewModel())
+    @ObservedObject var model = RouletteViewModel(authViewModel: AuthViewModel())
+   
     @ObservedObject var authViewModel: AuthViewModel
   
     var body: some View {
@@ -30,12 +31,15 @@ struct RouletteTableView: View {
     var zeroCell: some View {
         Rectangle()
             .frame(width: 40, height: 122)
-            .foregroundColor(model.selectedBetType == .number(0) ? .gray : model.color(for: 0))
+            
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
+            .foregroundColor(model.selectedBetType == .number(0) ? .gray : model.color(for: 0))
             .onTapGesture {
-                model.betViewModel.resetBet()
+                BetViewModel.shared.resetBet()
                 model.selectedBetType = nil
-                model.selectBetType(.number(0))
+               if let actualBetAmount = BetViewModel.shared.betAmount {
+                   BetViewModel.shared.bet(amount: actualBetAmount, betType: .number(0))
+                  }
             }
     }
     
@@ -56,8 +60,13 @@ struct RouletteTableView: View {
                         
                             
                             .onTapGesture {
-                                model.betViewModel.resetBet()
+                                BetViewModel.shared.resetBet()
                                 model.selectedBetType = nil
+                                
+                                if let actualBetAmount = BetViewModel.shared.betAmount {
+                                    BetViewModel.shared.bet(amount: actualBetAmount, betType: .number(number))
+                                }
+
                                 if model.selectedNumber == number {
                                      model.selectedNumber = nil
                                  } else {
@@ -82,8 +91,9 @@ struct RouletteTableView: View {
                     .onTapGesture {
                         model.selectedNumber = nil
                         model.selectedBetType = nil
-                        model.betViewModel.resetBet()
-                        
+                        BetViewModel.shared.resetBet()
+                        BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.firstLine, .secondLine, .thirdLine][index - 1])
+
                         model.selectBetType([.firstLine, .secondLine, .thirdLine][index - 1])
                     }
             }
@@ -106,9 +116,10 @@ struct RouletteTableView: View {
                                     .foregroundColor(.white)
                             )
                             .onTapGesture {
-                                model.betViewModel.resetBet()
+                                BetViewModel.shared.resetBet()
                                 model.selectedNumber = nil
                                 model.selectedBetType = nil
+                                BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.firstThird, .secondThird, .thirdThird][index])
                                 model.selectBetType([.firstThird, .secondThird, .thirdThird][index])
                             }
                     }
@@ -125,15 +136,15 @@ struct RouletteTableView: View {
                                     .foregroundColor(.white)
                             )
                             .onTapGesture {
-                                model.betViewModel.resetBet()
+                                BetViewModel.shared.resetBet()
                                 model.selectedNumber = nil
                                 model.selectedBetType = nil
+                                BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
                                 model.selectBetType([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
                             }
                     }
                 }
             }
-            
             Spacer()
                 .frame(width: 40)
         }

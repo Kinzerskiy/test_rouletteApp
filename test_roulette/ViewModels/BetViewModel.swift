@@ -32,12 +32,15 @@ struct Bet {
 
 class BetViewModel: ObservableObject {
     
-    @Published private var currentBet: Bet?
-    @Published var betAmount: Int? = nil
+    @Published var currentBet: Bet?
+    @Published var betAmount: Int?
+    
+    static let shared = BetViewModel()
 
     
     func bet(amount: Int, betType: BetType) {
-        currentBet = .init(amount: betAmount ?? 0, betType: betType)
+        currentBet = .init(amount: amount, betType: betType)
+        print("Bet placed: \(amount) on \(betType)")
     }
     
     func resetBet() {

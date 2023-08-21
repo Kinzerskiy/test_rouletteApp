@@ -38,11 +38,11 @@ class RouletteViewModel: ObservableObject {
 
     
     
-    var betViewModel: BetViewModel
+//    var betViewModel: BetViewModel
     var authViewModel: AuthViewModel
     
-    init(betViewModel: BetViewModel, authViewModel: AuthViewModel) {
-        self.betViewModel = betViewModel
+    init(authViewModel: AuthViewModel) {
+       
         self.authViewModel = authViewModel
     }
     
@@ -51,9 +51,9 @@ class RouletteViewModel: ObservableObject {
     func selectBetType(_ betType: BetType) {
         if selectedBetType == betType {
             selectedBetType = nil
-            betViewModel.resetBet()
+            BetViewModel.shared.resetBet()
         } else {
-            betViewModel.bet(amount: betViewModel.betAmount ?? 0, betType: betType)
+            BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: betType)
             isNumberSelected = true
             selectedBetType = betType
         }
@@ -64,11 +64,7 @@ class RouletteViewModel: ObservableObject {
     func spinWheel() {
         if rotationCount >= maxRotations && activeIndex == finalIndex {
             spinning = false
-            if let result = finalIndex {
-                let winAmount = betViewModel.calculateResult(result: result)
-                
-                return
-            }
+            endSpinning()
         }
         
         if spinning {
@@ -94,7 +90,7 @@ class RouletteViewModel: ObservableObject {
     
     func endSpinning() {
             guard let finalIndex = activeIndex else { return }
-            let result = betViewModel.calculateResult(result: finalIndex)
+            let result = BetViewModel.shared.calculateResult(result: finalIndex)
             
             if var appUser = authViewModel.appUser {
                
