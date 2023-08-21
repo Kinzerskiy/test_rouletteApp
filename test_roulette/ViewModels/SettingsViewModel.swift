@@ -16,7 +16,6 @@ final class SettingsViewModel: ObservableObject {
     func shareApp(completion: @escaping (UIActivityViewController) -> Void) {
         let url = URL(string: "https://apps.apple.com/app/idYOUR_APP_ID")!
         let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        
         completion(activityViewController)
     }
 }

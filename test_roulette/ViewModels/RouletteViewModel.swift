@@ -76,11 +76,7 @@ class RouletteViewModel: ObservableObject {
         }
     }
     
-    func stopSpinningAndResolveBet(bettingModel: BettingManager) {
-        spinning = false
-        bettingModel.resolveBet(finalIndex: finalIndex)
-    }
-    
+
     func color(for number: Int) -> Color {
         switch number {
         case 0:

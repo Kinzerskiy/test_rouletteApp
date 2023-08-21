@@ -11,11 +11,23 @@ import FirebaseAuth
 struct AppUser: Hashable, Decodable {
     var winRate: Int
     var coins: Int
-    var id: String
+    var uuid: String
     
-    init(winRate: Int, coins: Int, id: String) {
+    init(winRate: Int, coins: Int, uuid: String) {
         self.winRate = winRate
         self.coins = coins
-        self.id = id
+        self.uuid = uuid
+    }
+}
+
+extension AppUser {
+    init?(data: [String: Any]) {
+        guard let winRate = data["winRate"] as? Int,
+              let coins = data["coins"] as? Int,
+              let uuid = data["uuid"] as? String else {
+            return nil
+        }
+        
+        self.init(winRate: winRate, coins: coins, uuid: uuid)
     }
 }

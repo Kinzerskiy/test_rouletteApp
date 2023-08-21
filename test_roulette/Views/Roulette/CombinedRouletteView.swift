@@ -10,6 +10,7 @@ import SwiftUI
 struct CombinedRouletteView: View {
     
     @ObservedObject var model = RouletteViewModel()
+    
     @Binding var path: NavigationPath
     
         var body: some View {

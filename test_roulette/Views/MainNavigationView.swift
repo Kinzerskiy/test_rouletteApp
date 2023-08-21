@@ -16,14 +16,14 @@ struct MainNavigationView: View {
             TabView{
                 CombinedRouletteView(path: $path)
                     .tabItem {
-                        Label("Menu", systemImage: "list.dash")
+                        Label("Game", systemImage: "flag.2.crossed")
                     }
 
                 SettingsView(path: $path)
                                 .environmentObject(SettingsViewModel())
                                 .environmentObject(AuthViewModel())
                     .tabItem {
-                        Label("Order", systemImage: "square.and.pencil")
+                        Label("Settings", systemImage: "rectangle.inset.filled.and.person.filled")
                     }
             }
             

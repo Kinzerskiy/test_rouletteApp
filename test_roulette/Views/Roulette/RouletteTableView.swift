@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct RouletteTableView: View {
-    @State private var activeBets: [ActiveBet] = []
+    
+    
     @ObservedObject var model = RouletteViewModel()
-    @ObservedObject var betManager = BetManager()
+    
     
     var body: some View {
         VStack(spacing: 1) {
@@ -45,13 +46,10 @@ struct RouletteTableView: View {
                         
                         Rectangle()
                             .frame(width: 40, height: 40)
-                            .foregroundColor(betManager.isBetActive(.number(number)) ? .yellow : isHighlighted && !model.spinning ? .white : (isHighlighted && model.spinning && isNumberInList ? .white : model.color(for: number)))
+                            .foregroundColor(model.color(for: number))
                             .overlay(Text("\(number)")
                             .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
-                            .onTapGesture { betManager.toggleBet(type: .number(number))
-                            }
                     }
-                    
                 }
             }
         }
@@ -68,27 +66,21 @@ struct RouletteTableView: View {
         }
     }
     
-    
-    
-    
     var horizontalCells: some View {
         HStack(spacing: 1) {
             Spacer()
-                .frame(width: 40)
+                .frame(width: 20)
             
             VStack(spacing: 1) {
                 HStack(spacing: 1) {
                     ForEach(0..<3) { index in
                         Rectangle()
                             .frame(width: (40 * 12 + 10) / 3, height: 40)
-                            .foregroundColor(betManager.isBetActive(betManager.betTypeFrom(sectionIndex: index)) ? .yellow : .gray)
+                            .foregroundColor(.gray)
                             .overlay(
                                 Text(sectionText(for: index))
                                     .foregroundColor(.white)
                             )
-                            .onTapGesture {
-                                betManager.toggleBet(type: betManager.betTypeFrom(sectionIndex: index))
-                            }
                     }
                 }
                 
@@ -96,14 +88,11 @@ struct RouletteTableView: View {
                     ForEach(0..<6) { index in
                         Rectangle()
                             .frame(width: (40 * 12 + 7) / 6, height: 40)
-                            .foregroundColor(betManager.isBetActive(betManager.betTypeFrom(lowerSectionIndex: index)) ? .yellow : .gray)
+                            .foregroundColor(.gray)
                             .overlay(
                                 Text(lowerSectionText(for: index))
                                     .foregroundColor(.white)
                             )
-                            .onTapGesture {
-                                betManager.toggleBet(type: betManager.betTypeFrom(lowerSectionIndex: index))
-                            }
                     }
                 }
             }

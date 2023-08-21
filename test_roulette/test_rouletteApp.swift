@@ -37,7 +37,6 @@ struct test_rouletteApp: App {
                         }
                 }
             }
-            
         }
     }
 }
