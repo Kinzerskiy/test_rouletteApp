@@ -16,13 +16,14 @@ struct AuthView: View {
     
     var body: some View {
         ZStack {
+            Color.gray.edgesIgnoringSafeArea(.all)
             VStack {
+                Spacer()
                 HStack {
                     Spacer()
                     Button(action: {
                         authModel.signInAnonymously()
                         path.append(NavigationObject(flow: .main(.main)))
-                        
                     }) {
                         HStack {
                             Image(systemName: "theatermasks.fill").font(.title)
@@ -33,13 +34,12 @@ struct AuthView: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
-                    
                     Spacer()
                 }
                 Spacer()
             }
-            .padding()
-            .background(Color.gray)
+            
+            
         }
     }
 }
@@ -48,6 +48,6 @@ struct AuthView: View {
 
 struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
-            AuthView(path: .constant(NavigationPath())).environmentObject(AuthViewModel())
+        AuthView(path: .constant(NavigationPath())).environmentObject(AuthViewModel())
     }
 }

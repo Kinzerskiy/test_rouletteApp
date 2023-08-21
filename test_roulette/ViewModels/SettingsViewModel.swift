@@ -9,6 +9,7 @@ import Foundation
 import StoreKit
 
 final class SettingsViewModel: ObservableObject {
+    
     func rateApp() {
         SKStoreReviewController.requestReview()
     }

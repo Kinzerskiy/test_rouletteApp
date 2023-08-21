@@ -31,7 +31,7 @@ struct SettingsView: View {
             Button(action: {
                 authModel.signOut()
                 path.append(NavigationObject(flow: .auth(.auth)))
-               
+                
             }) {
                 Text("Log out")
                     .padding()
@@ -86,8 +86,8 @@ struct SettingsView: View {
                     .cornerRadius(10)
             }
             .sheet(isPresented: $showingShareSheet) {
-                           ActivityViewController(activityItems: [URL(string: "https://www.traffbraza.com/")!], applicationActivities: nil)
-                       }
+                ActivityViewController(activityItems: [URL(string: "https://www.traffbraza.com/")!], applicationActivities: nil)
+            }
         }
         .padding()
     }

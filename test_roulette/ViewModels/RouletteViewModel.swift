@@ -76,7 +76,7 @@ class RouletteViewModel: ObservableObject {
         }
     }
     
-
+    
     func color(for number: Int) -> Color {
         switch number {
         case 0:

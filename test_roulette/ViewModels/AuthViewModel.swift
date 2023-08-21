@@ -14,7 +14,38 @@ import FirebaseFirestore
 final class AuthViewModel: ObservableObject {
     
     @Published var user: User?
+    @Published var appUser: AppUser?
+    
     private var db = Firestore.firestore()
+    var listener: ListenerRegistration?
+
+    
+    func startListeningForUserData() {
+           guard let uid = Auth.auth().currentUser?.uid else {
+               return
+           }
+        
+           let userDocRef = Firestore.firestore().collection("Users").document(uid)
+
+           listener = userDocRef.addSnapshotListener { (documentSnapshot, error) in
+               guard let document = documentSnapshot else {
+                   print("Error fetching document: \(error!)")
+                   return
+               }
+               guard let data = document.data() else {
+                   print("Document data was empty.")
+                   return
+               }
+               if let user = AppUser(data: data) {
+                   self.appUser = user
+               }
+           }
+       }
+    
+    func stopListening() {
+          listener?.remove()
+      }
+    
     
     func listenToAuthState() {
         Auth.auth().addStateDidChangeListener { [weak self] _, user in
@@ -85,7 +116,7 @@ final class AuthViewModel: ObservableObject {
             completion(error)
         }
     }
-
+    
     
     func createUserInFirestore(uuid: String, completion: @escaping (Error?) -> Void) {
         let userData: [String: Any] = [
@@ -120,12 +151,32 @@ final class AuthViewModel: ObservableObject {
                 if let error = error {
                     print("Error fetching user data: \(error.localizedDescription)")
                 } else {
+                    self.appUser = appUser
                     print("Fetched user data: \(String(describing: appUser))")
                 }
             }
         }
     }
     
+    func updateUserData(user: AppUser) {
+        
+        let db = Firestore.firestore()
+        let userDocRef = db.collection("Users").document(user.uuid)
+
+        let valuesToUpdate: [String: Any] = [
+            "winRate": user.winRate,
+            "coins": user.coins
+        ]
+        
+       
+        userDocRef.updateData(valuesToUpdate) { error in
+            if let error = error {
+                print("Error updating user data: \(error.localizedDescription)")
+            } else {
+                print("Successfully updated user data for \(user.uuid)")
+            }
+        }
+    }
     
     
 }

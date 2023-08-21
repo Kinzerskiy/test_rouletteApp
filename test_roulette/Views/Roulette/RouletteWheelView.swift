@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RouletteWheelView: View {
     
-    @ObservedObject var model = RouletteViewModel()
+    @ObservedObject var model: RouletteViewModel
     
     var body: some View {
         GeometryReader { geometry in
@@ -50,20 +50,15 @@ struct RouletteWheelView: View {
             }
             .rotationEffect(Angle(degrees: model.wheelRotation))
             
-            Button("Start") {
-                model.startSpinning()
-            }
-            .padding(.bottom, 30)
+            
+            .padding(.bottom, 20)
         }
         .aspectRatio(1, contentMode: .fit)
     }
 }
 
-
-
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteWheelView()
+        RouletteWheelView(model: RouletteViewModel())
     }
 }

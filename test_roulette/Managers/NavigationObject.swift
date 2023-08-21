@@ -19,7 +19,7 @@ struct NavigationObject: Hashable {
     }
     
     let flow: Flow
-
+    
     @ViewBuilder func configureNextScreen(with path: Binding<NavigationPath>) -> some View {
         switch flow {
         case .auth(let screen):

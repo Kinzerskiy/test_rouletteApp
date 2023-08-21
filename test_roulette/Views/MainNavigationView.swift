@@ -9,25 +9,25 @@ import SwiftUI
 
 struct MainNavigationView: View {
     
-
+    
     @Binding var path: NavigationPath
-   
-        var body: some View {
-            TabView{
-                CombinedRouletteView(path: $path)
-                    .tabItem {
-                        Label("Game", systemImage: "flag.2.crossed")
-                    }
-
-                SettingsView(path: $path)
-                                .environmentObject(SettingsViewModel())
-                                .environmentObject(AuthViewModel())
-                    .tabItem {
-                        Label("Settings", systemImage: "rectangle.inset.filled.and.person.filled")
-                    }
-            }
+    
+    var body: some View {
+        TabView{
+            CombinedRouletteView(path: $path)
+                .tabItem {
+                    Label("Game", systemImage: "flag.2.crossed")
+                }
             
+            SettingsView(path: $path)
+                .environmentObject(SettingsViewModel())
+                .environmentObject(AuthViewModel())
+                .tabItem {
+                    Label("Settings", systemImage: "rectangle.inset.filled.and.person.filled")
+                }
         }
+        
+    }
 }
 
 struct MainNavigationView_Previews: PreviewProvider {

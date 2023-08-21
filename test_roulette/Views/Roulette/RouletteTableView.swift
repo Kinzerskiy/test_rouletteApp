@@ -42,13 +42,12 @@ struct RouletteTableView: View {
                     ForEach(1..<13) { columnIndex in
                         let number = (columnIndex - 1) * 3 + rowIndex
                         let isHighlighted = model.activeIndex == number
-                        let isNumberInList = model.wheelOrder.contains(number)
                         
                         Rectangle()
                             .frame(width: 40, height: 40)
                             .foregroundColor(model.color(for: number))
                             .overlay(Text("\(number)")
-                            .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
+                                .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
                     }
                 }
             }

@@ -14,7 +14,6 @@ import FirebaseFirestore
 @main
 struct test_rouletteApp: App {
     
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     @State var path = NavigationPath()

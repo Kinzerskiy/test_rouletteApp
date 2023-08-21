@@ -13,8 +13,6 @@
 		8E5D30C42A90CC9C00701A58 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */; };
 		8E69380A2A9257C100CE7972 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6938092A9257C000CE7972 /* MainNavigationView.swift */; };
 		8E69380D2A92627D00CE7972 /* NavigationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69380C2A92627C00CE7972 /* NavigationObject.swift */; };
-		8E6938132A92695D00CE7972 /* RouletteBetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6938122A92695D00CE7972 /* RouletteBetView.swift */; };
-		8E6938152A927C5D00CE7972 /* BetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6938142A927C5D00CE7972 /* BetManager.swift */; };
 		8E694EFF2A91006E005537A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */; };
 		8E6CFA1D2A8F5B3800DE93A0 /* RouletteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */; };
 		8E7E64D12A8F5FB9001DE0FC /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */; };
@@ -24,6 +22,8 @@
 		8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */; };
 		8EB19BE62A8E251D00422FAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE52A8E251D00422FAE /* Assets.xcassets */; };
 		8EB19BE92A8E251D00422FAE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */; };
+		8ECA2D4B2A9329D800910857 /* BetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2D4A2A9329D800910857 /* BetView.swift */; };
+		8ECA2D4D2A933D4900910857 /* BetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2D4C2A933D4900910857 /* BetViewModel.swift */; };
 		CB3A4D75CA34C07B2A4E1500 /* Pods_test_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8962E7572F0E371B479D7553 /* Pods_test_roulette.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +37,6 @@
 		8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8E6938092A9257C000CE7972 /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
 		8E69380C2A92627C00CE7972 /* NavigationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationObject.swift; sourceTree = "<group>"; };
-		8E6938122A92695D00CE7972 /* RouletteBetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteBetView.swift; sourceTree = "<group>"; };
-		8E6938142A927C5D00CE7972 /* BetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetManager.swift; sourceTree = "<group>"; };
 		8E694EFB2A90F438005537A3 /* test-roulette-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "test-roulette-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteTableView.swift; sourceTree = "<group>"; };
@@ -50,6 +48,8 @@
 		8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteWheelView.swift; sourceTree = "<group>"; };
 		8EB19BE52A8E251D00422FAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8ECA2D4A2A9329D800910857 /* BetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetView.swift; sourceTree = "<group>"; };
+		8ECA2D4C2A933D4900910857 /* BetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +78,7 @@
 			children = (
 				8E5D30BC2A90B0F800701A58 /* Roulette */,
 				8E5D30C12A90CA2D00701A58 /* AuthView.swift */,
+				8ECA2D4A2A9329D800910857 /* BetView.swift */,
 				8E898F842A910A16007D4B5A /* SettingsView.swift */,
 				8E6938092A9257C000CE7972 /* MainNavigationView.swift */,
 			);
@@ -90,6 +91,7 @@
 				8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */,
 				8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */,
 				8E898F862A910CB9007D4B5A /* SettingsViewModel.swift */,
+				8ECA2D4C2A933D4900910857 /* BetViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -98,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				8E69380C2A92627C00CE7972 /* NavigationObject.swift */,
-				8E6938142A927C5D00CE7972 /* BetManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -109,7 +110,6 @@
 				8E5D30B12A8FA09B00701A58 /* CombinedRouletteView.swift */,
 				8EB19BE32A8E251700422FAE /* RouletteWheelView.swift */,
 				8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */,
-				8E6938122A92695D00CE7972 /* RouletteBetView.swift */,
 			);
 			path = Roulette;
 			sourceTree = "<group>";
@@ -291,19 +291,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E6938152A927C5D00CE7972 /* BetManager.swift in Sources */,
 				8E5D30C42A90CC9C00701A58 /* AuthViewModel.swift in Sources */,
 				8EB19BE42A8E251700422FAE /* RouletteWheelView.swift in Sources */,
 				8EB19BE22A8E251700422FAE /* test_rouletteApp.swift in Sources */,
 				8E6CFA1D2A8F5B3800DE93A0 /* RouletteTableView.swift in Sources */,
 				8E5D30BE2A90B20D00701A58 /* AppUser.swift in Sources */,
 				8E69380D2A92627D00CE7972 /* NavigationObject.swift in Sources */,
+				8ECA2D4B2A9329D800910857 /* BetView.swift in Sources */,
 				8E5D30B22A8FA09B00701A58 /* CombinedRouletteView.swift in Sources */,
 				8E69380A2A9257C100CE7972 /* MainNavigationView.swift in Sources */,
 				8E7E64D12A8F5FB9001DE0FC /* RouletteViewModel.swift in Sources */,
 				8E5D30C22A90CA2D00701A58 /* AuthView.swift in Sources */,
 				8E898F852A910A16007D4B5A /* SettingsView.swift in Sources */,
-				8E6938132A92695D00CE7972 /* RouletteBetView.swift in Sources */,
+				8ECA2D4D2A933D4900910857 /* BetViewModel.swift in Sources */,
 				8E898F872A910CB9007D4B5A /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
