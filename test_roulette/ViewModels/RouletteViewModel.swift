@@ -54,9 +54,11 @@ class RouletteViewModel: ObservableObject {
     
     func spinWheel() {
         if rotationCount >= maxRotations && activeIndex == finalIndex {
-            spinning = false
-            self.completion(finalIndex ?? 0)
-//            endSpinning()
+                spinning = false
+                if let index = finalIndex {
+                    let resultingNumber = wheelOrder[index]
+                    self.completion(resultingNumber)
+                } else { return }
         }
         
         if spinning {
@@ -80,18 +82,7 @@ class RouletteViewModel: ObservableObject {
         }
         
     }
-//
-//    func endSpinning() {
-//        guard let finalIndex = activeIndex else { return }
-//        let result = betViewModel.calculateResult(result: finalIndex)
-//
-//        if var appUser = authViewModel.appUser {
-//            appUser.coins += result
-//            authViewModel.updateUserData(user: appUser)
-//        }
-//    }
 
-    
     func startSpinning() {
         if !spinning {
             if !spinning {

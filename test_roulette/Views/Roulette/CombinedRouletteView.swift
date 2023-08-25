@@ -21,7 +21,6 @@ struct CombinedRouletteView: View {
         self.authViewModel = authViewModel
         self.betViewModel = betViewModel
         
-        
         self.model = RouletteViewModel(completion: { finalValue in
             _ = betViewModel.calculateResult(result: finalValue)
         })
@@ -82,6 +81,6 @@ struct CombinedRouletteView: View {
 
 struct CombinedRouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel(), completion: {_ in})
+        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel(authViewModel: AuthViewModel()), completion: {_ in})
     }
 }

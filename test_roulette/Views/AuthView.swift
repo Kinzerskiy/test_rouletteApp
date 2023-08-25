@@ -12,8 +12,7 @@ struct AuthView: View {
     
     @EnvironmentObject private var authModel: AuthViewModel
     @Binding var path: NavigationPath
-    
-    
+
     var body: some View {
         ZStack {
             Color.gray.edgesIgnoringSafeArea(.all)

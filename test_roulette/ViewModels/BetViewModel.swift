@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 enum BetType: Equatable {
     case firstThird
     case secondThird
@@ -33,9 +34,15 @@ class BetViewModel: ObservableObject {
     
     @Published var currentBet: Bet?
     @Published var betAmount: Int?
+   
+    var authViewModel: AuthViewModel
+    
+    init(authViewModel: AuthViewModel) {
+            self.authViewModel = authViewModel
+        }
 
     func updateBetType(betType: BetType) {
-        if let bet = currentBet {
+        if currentBet != nil {
             currentBet?.betType = betType
         } else {
             currentBet = .init(amount: 0, betType: betType)
@@ -43,7 +50,7 @@ class BetViewModel: ObservableObject {
     }
     
     func updateAmount(amount: Int) {
-        if let bet = currentBet {
+        if currentBet != nil {
             currentBet?.amount = amount
         } else {
             currentBet = .init(amount: 0, betType: .red)
@@ -56,64 +63,55 @@ class BetViewModel: ObservableObject {
     
     func calculateResult(result: Int) -> Int {
         defer {
+            
             resetBet()
         }
-        
+
         guard let currentBet = currentBet else { return 0 }
+
+        var winningsOrLosses = 0
+
         switch currentBet.betType {
         case .number(let number):
             if number == result {
-                return currentBet.amount * 35
+                winningsOrLosses = currentBet.amount * 35
+            } else {
+                winningsOrLosses = -currentBet.amount
             }
         case .odd:
-            if result % 2 != 0 {
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = result % 2 != 0 ? currentBet.amount * 2 : -currentBet.amount
         case .even:
-            if result % 2 == 0{
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = result % 2 == 0 ? currentBet.amount * 2 : -currentBet.amount
         case .red:
-            if [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].contains(result) {
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36].contains(result) ? currentBet.amount * 2 : -currentBet.amount
         case .black:
-            if [2, 4, 6, 8, 11, 10, 13, 15,17, 20, 24, 22, 26, 29, 28, 31, 33, 35].contains(result) {
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = [2, 4, 6, 8, 11, 10, 13, 15, 17, 20, 24, 22, 26, 29, 28, 31, 33, 35].contains(result) ? currentBet.amount * 2 : -currentBet.amount
         case .firstThird:
-            if [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         case .secondThird:
-            if [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         case .thirdThird:
-            if [25,26,27,28,29,30,31,32,33,34,35,36].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         case .oneEighteen:
-            if [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].contains(result) {
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18].contains(result) ? currentBet.amount * 2 : -currentBet.amount
         case .nineghtingThirtySix:
-            if [19, 20, 21, 22, 23, 24,25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36].contains(result) {
-                return currentBet.amount * 2
-            }
+            winningsOrLosses = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36].contains(result) ? currentBet.amount * 2 : -currentBet.amount
         case .firstLine:
-            if [1,3,7,10,13,16,19,22,25,28,31,34].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [1, 3, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         case .secondLine:
-            if [2,5,8,11,14,17,20,23,26,29,32,35].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         case .thirdLine:
-            if [3,6,9,12,15,18,21,24,27,30,33,36].contains(result) {
-                return currentBet.amount * 3
-            }
+            winningsOrLosses = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         }
-        return 0
+        
+        if var user = authViewModel.appUser {
+                    user.coins += winningsOrLosses
+                    authViewModel.appUser = user
+                    authViewModel.updateUserData(user: user)
+                }
+       
+
+        return winningsOrLosses
+        
     }
 }
