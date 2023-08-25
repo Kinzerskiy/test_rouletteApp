@@ -34,12 +34,8 @@ class BetViewModel: ObservableObject {
     
     @Published var currentBet: Bet?
     @Published var betAmount: Int?
-   
-    var authViewModel: AuthViewModel
     
-    init(authViewModel: AuthViewModel) {
-            self.authViewModel = authViewModel
-        }
+    
 
     func updateBetType(betType: BetType) {
         if currentBet != nil {
@@ -61,14 +57,19 @@ class BetViewModel: ObservableObject {
         currentBet = nil
     }
     
-    func calculateResult(result: Int) -> Int {
+
+    
+    func calculateResult(result: Int, completion: @escaping (Int) -> ()) {
         defer {
             
             resetBet()
         }
 
-        guard let currentBet = currentBet else { return 0 }
-
+        guard let currentBet = currentBet else {
+            completion(0)
+            return
+            }
+        
         var winningsOrLosses = 0
 
         switch currentBet.betType {
@@ -103,15 +104,6 @@ class BetViewModel: ObservableObject {
         case .thirdLine:
             winningsOrLosses = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         }
-        
-        if var user = authViewModel.appUser {
-                    user.coins += winningsOrLosses
-                    authViewModel.appUser = user
-                    authViewModel.updateUserData(user: user)
-                }
-       
-
-        return winningsOrLosses
-        
+        completion(winningsOrLosses)
     }
 }

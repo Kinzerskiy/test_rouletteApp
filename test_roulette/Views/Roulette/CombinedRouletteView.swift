@@ -22,7 +22,14 @@ struct CombinedRouletteView: View {
         self.betViewModel = betViewModel
         
         self.model = RouletteViewModel(completion: { finalValue in
-            _ = betViewModel.calculateResult(result: finalValue)
+            betViewModel.calculateResult(result: finalValue) { winnings in
+                if let user = authViewModel.appUser {
+                    var mutableUser = user
+                    mutableUser.coins += winnings
+                    authViewModel.appUser = mutableUser
+                    authViewModel.updateUserData(user: mutableUser)
+                }
+            }
         })
         _path = path
     }
@@ -59,6 +66,7 @@ struct CombinedRouletteView: View {
                     
                     Button(action: {
                         self.model.startSpinning()
+                        
                     }) {
                         Text("Start")
                             .padding()
@@ -81,6 +89,6 @@ struct CombinedRouletteView: View {
 
 struct CombinedRouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel(authViewModel: AuthViewModel()), completion: {_ in})
+        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel(), completion: {_ in})
     }
 }
