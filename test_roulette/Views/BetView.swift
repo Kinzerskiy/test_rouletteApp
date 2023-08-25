@@ -12,11 +12,13 @@ import FirebaseAuth
 
 struct BetView: View {
     @ObservedObject var authViewModel: AuthViewModel
-    @ObservedObject var betViewModel = BetViewModel()
-
-    @State var betAmount: Int
+   
+    
+    @State var betAmount: Int = 0
     @State private var showAlert: Bool = false
-
+    
+    var amountCompletion: (Int) -> ()
+    
     var body: some View {
         VStack(spacing: 2) {
             Text("ID: \(authViewModel.appUser?.uuid ?? "Loading...")")
@@ -25,7 +27,7 @@ struct BetView: View {
                 .fontWeight(.light)
             Text("Coins: \(authViewModel.appUser?.coins ?? 0)")
                 .fontWeight(.light)
-
+            
             if let coins = authViewModel.appUser?.coins {
                 Stepper(value: $betAmount, in: 0...coins, step: 10) {
                     Text("Bet: \(betAmount)")
@@ -34,18 +36,14 @@ struct BetView: View {
                 Text("Fetching coins...")
                     .fontWeight(.light)
             }
-
-            Text("Current Bet: \(betViewModel.currentBet?.amount ?? 0) on \(String(describing: BetViewModel.shared.currentBet?.betType))")
-
+            
+          
+            
             Button("Place Bet") {
                 print("Button tapped")
-
+                
                 DispatchQueue.main.async {
-                    if let currentBetType = BetViewModel.shared.currentBet?.betType {
-                        BetViewModel.shared.bet(amount: betAmount, betType: currentBetType)
-                    } else {
-                        print("No current bet exists")
-                    }
+                    self.amountCompletion(betAmount)
                 }
             }
             .fontWeight(.light)
@@ -76,6 +74,6 @@ struct BetView: View {
 
 struct BetView_Previews: PreviewProvider {
     static var previews: some View {
-        BetView(authViewModel: AuthViewModel(), betViewModel: BetViewModel(), betAmount: 10)
+        BetView(authViewModel: AuthViewModel(), betAmount: 10, amountCompletion: {_ in })
     }
 }

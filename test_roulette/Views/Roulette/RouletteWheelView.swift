@@ -49,8 +49,6 @@ struct RouletteWheelView: View {
                     .frame(width: geometry.size.width / 1.5, height: geometry.size.height)
             }
             .rotationEffect(Angle(degrees: model.wheelRotation))
-            
-            
             .padding(.bottom, 20)
         }
         .aspectRatio(1, contentMode: .fit)
@@ -59,6 +57,6 @@ struct RouletteWheelView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteWheelView(model: RouletteViewModel(authViewModel: AuthViewModel()))
+        RouletteWheelView(model: RouletteViewModel(authViewModel: AuthViewModel(), betViewModel: BetViewModel()))
     }
 }

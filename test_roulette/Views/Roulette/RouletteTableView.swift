@@ -9,9 +9,11 @@ import SwiftUI
 
 struct RouletteTableView: View {
 
-    @ObservedObject var model = RouletteViewModel(authViewModel: AuthViewModel())
-   
+    @ObservedObject var model: RouletteViewModel
     @ObservedObject var authViewModel: AuthViewModel
+    
+    var betTypeCompletion: (BetType) -> ()
+   
   
     var body: some View {
         VStack(spacing: 1) {
@@ -35,11 +37,9 @@ struct RouletteTableView: View {
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
             .foregroundColor(model.selectedBetType == .number(0) ? .gray : model.color(for: 0))
             .onTapGesture {
-                BetViewModel.shared.resetBet()
+                self.betTypeCompletion(.number(0))
                 model.selectedBetType = nil
-               if let actualBetAmount = BetViewModel.shared.betAmount {
-                   BetViewModel.shared.bet(amount: actualBetAmount, betType: .number(0))
-                  }
+            
             }
     }
     
@@ -49,31 +49,27 @@ struct RouletteTableView: View {
                 HStack(spacing: 1) {
                     ForEach(1..<13) { columnIndex in
                         let number = (columnIndex - 1) * 3 + rowIndex
-                        let isHighlighted = model.activeIndex == number
                         
                         Rectangle()
                             .frame(width: 40, height: 40)
                             .foregroundColor(model.color(for: number))
                             .opacity(model.selectedNumber == number ? 0.5 : 1.0)
-                            .overlay(Text("\(number)")
-                                .foregroundColor(isHighlighted && !model.spinning ? .green : .white))
+                            .overlay(Text("\(number)")).foregroundColor(.white)
                         
-                            
+                        
+                        
                             .onTapGesture {
-                                BetViewModel.shared.resetBet()
-                                model.selectedBetType = nil
+                           
+                                model.selectedBetType = .number(number)
+                                self.betTypeCompletion(.number(number))
                                 
-                                if let actualBetAmount = BetViewModel.shared.betAmount {
-                                    BetViewModel.shared.bet(amount: actualBetAmount, betType: .number(number))
-                                }
-
                                 if model.selectedNumber == number {
-                                     model.selectedNumber = nil
-                                 } else {
-                                     
-                                     model.isNumberSelected = true
-                                     model.selectedNumber = number
-                                 }
+                                    model.selectedNumber = nil
+                                    model.isNumberSelected = false
+                                } else {
+                                    model.isNumberSelected = true
+                                    model.selectedNumber = number
+                                }
                             }
                     }
                 }
@@ -88,11 +84,11 @@ struct RouletteTableView: View {
                     .frame(width: 60, height: 40)
                     .foregroundColor(model.selectedBetType == [.firstLine, .secondLine, .thirdLine][index - 1] ? .red : .gray)
                     .overlay(Text("2 - 1").foregroundColor(.white))
+                
                     .onTapGesture {
                         model.selectedNumber = nil
                         model.selectedBetType = nil
-                        BetViewModel.shared.resetBet()
-                        BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.firstLine, .secondLine, .thirdLine][index - 1])
+                        self.betTypeCompletion([.firstLine, .secondLine, .thirdLine][index - 1] )
 
                         model.selectBetType([.firstLine, .secondLine, .thirdLine][index - 1])
                     }
@@ -116,10 +112,10 @@ struct RouletteTableView: View {
                                     .foregroundColor(.white)
                             )
                             .onTapGesture {
-                                BetViewModel.shared.resetBet()
+                                self.betTypeCompletion([.firstThird, .secondThird, .thirdThird][index])
                                 model.selectedNumber = nil
                                 model.selectedBetType = nil
-                                BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.firstThird, .secondThird, .thirdThird][index])
+                              
                                 model.selectBetType([.firstThird, .secondThird, .thirdThird][index])
                             }
                     }
@@ -136,10 +132,10 @@ struct RouletteTableView: View {
                                     .foregroundColor(.white)
                             )
                             .onTapGesture {
-                                BetViewModel.shared.resetBet()
+                                self.betTypeCompletion([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
                                 model.selectedNumber = nil
                                 model.selectedBetType = nil
-                                BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: [.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
+                            
                                 model.selectBetType([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
                             }
                     }
@@ -188,7 +184,7 @@ struct RouletteTableView: View {
 
 struct RouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteTableView(authViewModel: AuthViewModel())
+        RouletteTableView(model: RouletteViewModel(authViewModel: AuthViewModel(), betViewModel: BetViewModel()), authViewModel: AuthViewModel(), betTypeCompletion: {_ in })
     }
 }
 

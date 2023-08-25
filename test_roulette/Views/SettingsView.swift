@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ActivityViewController: UIViewControllerRepresentable {
+    
     var activityItems: [Any]
     var applicationActivities: [UIActivity]?
     

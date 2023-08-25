@@ -37,13 +37,10 @@ struct AuthView: View {
                     Spacer()
                 }
                 Spacer()
-            }
-            
-            
+            }  
         }
     }
 }
-
 
 
 struct AuthView_Previews: PreviewProvider {

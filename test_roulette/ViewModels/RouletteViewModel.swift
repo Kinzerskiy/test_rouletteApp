@@ -30,30 +30,19 @@ class RouletteViewModel: ObservableObject {
     @Published var maxRotations: Int = Int.random(in: 2...5)
     @Published var wheelRotation: Double = 0.0
     @Published var spinDirection: SpinDirection = .clockwise
-    @Published var resultMessage: String = ""
-    @Published var showResultAlert: Bool = false
     @Published var isNumberSelected: Bool = false
     @Published var selectedNumber: Int? = nil
     @Published var selectedBetType: BetType? = nil
-
     
-    
-//    var betViewModel: BetViewModel
-    var authViewModel: AuthViewModel
-    
-    init(authViewModel: AuthViewModel) {
-       
-        self.authViewModel = authViewModel
-    }
+    var completion: (Int) -> ()
+    init(completion: completion: (Int) -> ())
     
     let wheelOrder: [Int] = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20 , 14, 31, 9, 22, 18, 29, 7, 28,12, 35, 3, 26]
     
     func selectBetType(_ betType: BetType) {
         if selectedBetType == betType {
             selectedBetType = nil
-            BetViewModel.shared.resetBet()
         } else {
-            BetViewModel.shared.bet(amount: BetViewModel.shared.betAmount ?? 0, betType: betType)
             isNumberSelected = true
             selectedBetType = betType
         }
@@ -89,15 +78,14 @@ class RouletteViewModel: ObservableObject {
     }
     
     func endSpinning() {
-            guard let finalIndex = activeIndex else { return }
-            let result = BetViewModel.shared.calculateResult(result: finalIndex)
-            
-            if var appUser = authViewModel.appUser {
-               
-                appUser.coins += result
-                authViewModel.updateUserData(user: appUser)
-            }
+        guard let finalIndex = activeIndex else { return }
+        let result = betViewModel.calculateResult(result: finalIndex)
+        
+        if var appUser = authViewModel.appUser {
+            appUser.coins += result
+            authViewModel.updateUserData(user: appUser)
         }
+    }
 
     
     func startSpinning() {
@@ -109,20 +97,8 @@ class RouletteViewModel: ObservableObject {
                 finalIndex = Int.random(in: 1...36)
                 activeIndex = Int.random(in: wheelOrder.indices)
                 spinWheel()
-                
-                let resultColor = color(for: finalIndex!)
-                if resultColor == .red {
-                    resultMessage = "The ball landed on red!"
-                } else if resultColor == .black {
-                    resultMessage = "The ball landed on black!"
-                } else {
-                    resultMessage = "The ball landed on green!"
-                }
-                showResultAlert = true
+                spinDirection.toggle()
             }
-            
-            spinDirection.toggle()
-            
         }
     }
     

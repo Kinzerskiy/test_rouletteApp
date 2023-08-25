@@ -177,6 +177,4 @@ final class AuthViewModel: ObservableObject {
             }
         }
     }
-    
-    
 }

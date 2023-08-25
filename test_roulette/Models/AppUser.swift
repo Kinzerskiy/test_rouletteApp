@@ -18,7 +18,10 @@ struct AppUser: Hashable, Decodable {
         self.coins = coins
         self.uuid = uuid
     }
+    
+   
 }
+
 
 extension AppUser {
     init?(data: [String: Any]) {

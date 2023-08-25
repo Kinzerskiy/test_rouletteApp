@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 enum BetType: Equatable {
     case firstThird
     case secondThird
@@ -26,21 +25,29 @@ enum BetType: Equatable {
 }
 
 struct Bet {
-    let amount: Int
-    let betType: BetType
+    var amount: Int
+    var betType: BetType
 }
 
 class BetViewModel: ObservableObject {
     
     @Published var currentBet: Bet?
     @Published var betAmount: Int?
-    
-    static let shared = BetViewModel()
 
+    func updateBetType(betType: BetType) {
+        if let bet = currentBet {
+            currentBet?.betType = betType
+        } else {
+            currentBet = .init(amount: 0, betType: betType)
+        }
+    }
     
-    func bet(amount: Int, betType: BetType) {
-        currentBet = .init(amount: amount, betType: betType)
-        print("Bet placed: \(amount) on \(betType)")
+    func updateAmount(amount: Int) {
+        if let bet = currentBet {
+            currentBet?.amount = amount
+        } else {
+            currentBet = .init(amount: 0, betType: .red)
+        }
     }
     
     func resetBet() {
@@ -51,6 +58,7 @@ class BetViewModel: ObservableObject {
         defer {
             resetBet()
         }
+        
         guard let currentBet = currentBet else { return 0 }
         switch currentBet.betType {
         case .number(let number):
