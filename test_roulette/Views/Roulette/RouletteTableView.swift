@@ -184,7 +184,7 @@ struct RouletteTableView: View {
 
 struct RouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteTableView(model: RouletteViewModel(authViewModel: AuthViewModel(), betViewModel: BetViewModel()), authViewModel: AuthViewModel(), betTypeCompletion: {_ in })
+        RouletteTableView(model: RouletteViewModel(completion: {_ in}), authViewModel: AuthViewModel(), betTypeCompletion: {_ in})
     }
 }
 

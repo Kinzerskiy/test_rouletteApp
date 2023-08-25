@@ -14,7 +14,7 @@ struct MainNavigationView: View {
     
     var body: some View {
         TabView{
-            CombinedRouletteView(path: $path, authViewModel: AuthViewModel(), betViewModel: BetViewModel())
+            CombinedRouletteView(path: $path, authViewModel: AuthViewModel(), betViewModel: BetViewModel(), completion: {_ in})
                 .tabItem {
                     Label("Game", systemImage: "flag.2.crossed")
                 }

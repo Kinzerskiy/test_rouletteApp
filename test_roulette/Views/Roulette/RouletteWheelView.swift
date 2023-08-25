@@ -10,6 +10,7 @@ import SwiftUI
 struct RouletteWheelView: View {
     
     @ObservedObject var model: RouletteViewModel
+   
     
     var body: some View {
         GeometryReader { geometry in
@@ -57,6 +58,6 @@ struct RouletteWheelView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteWheelView(model: RouletteViewModel(authViewModel: AuthViewModel(), betViewModel: BetViewModel()))
+        RouletteWheelView(model: RouletteViewModel(completion: {_ in}))
     }
 }
