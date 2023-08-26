@@ -15,24 +15,44 @@ struct CombinedRouletteView: View {
     
     @Binding var path: NavigationPath
     
+    @State private var showAlert: Bool = false {
+        didSet {
+            print("showAlert изменено на \(showAlert)")
+        }
+    }
+    @State private var alertComment: String = ""
     
-    init(path: Binding<NavigationPath>, authViewModel: AuthViewModel, betViewModel: BetViewModel, completion: @escaping (Int) -> ()) {
-        
-        self.authViewModel = authViewModel
-        self.betViewModel = betViewModel
-        
-        self.model = RouletteViewModel(completion: { finalValue in
-            betViewModel.calculateResult(result: finalValue) { winnings in
-                if let user = authViewModel.appUser {
-                    var mutableUser = user
-                    mutableUser.coins += winnings
-                    authViewModel.appUser = mutableUser
-                    authViewModel.updateUserData(user: mutableUser)
+
+    init(path: Binding<NavigationPath>, authViewModel: AuthViewModel, betViewModel: BetViewModel) {
+           
+           _path = path
+           self.authViewModel = authViewModel
+           self.betViewModel = betViewModel
+           self.model = RouletteViewModel(completion: { finalValue in
+               betViewModel.calculateResult(result: finalValue)
+           })
+           
+           self.betViewModel.completion = fetchWinnings
+       }
+
+    func fetchWinnings(winnings: Int) {
+            if let user = authViewModel.appUser {
+                var mutableUser = user
+                mutableUser.coins += winnings
+                authViewModel.appUser = mutableUser
+                authViewModel.updateUserData(user: mutableUser)
+                
+                ChatGPTService.shared.fetchComment(for: winnings) { comment in
+                    print("Получен комментарий: \(comment)")
+                    
+                    DispatchQueue.main.async {
+                        self.alertComment = comment
+                    }
+                    self.showAlert = true
                 }
             }
-        })
-        _path = path
-    }
+        }
+
     
     var body: some View {
         GeometryReader { geometry in
@@ -45,8 +65,8 @@ struct CombinedRouletteView: View {
                     .frame(width: geometry.size.height * 0.3)
                 }
                 .position(x: geometry.size.width * 0.3, y: geometry.size.height / 2)
-
-              
+                
+                
                 VStack(spacing: 30) {
                     RouletteWheelView(model: self.model)
                         .rotationEffect(.degrees(90))
@@ -66,7 +86,6 @@ struct CombinedRouletteView: View {
                     
                     Button(action: {
                         self.model.startSpinning()
-                        
                     }) {
                         Text("Start")
                             .padding()
@@ -80,15 +99,17 @@ struct CombinedRouletteView: View {
                 .padding(.leading, geometry.size.width * 0.5)
             }
             .padding(.top, 0)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Результат игры"), message: Text(alertComment), dismissButton: .default(Text("OK")))
+            }
         }
     }
-
 }
 
 
 
 struct CombinedRouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel(), completion: {_ in})
+        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel())
     }
 }
