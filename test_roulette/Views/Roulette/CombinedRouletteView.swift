@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct CombinedRouletteView: View {
     
     @ObservedObject var authViewModel: AuthViewModel
@@ -20,6 +21,7 @@ struct CombinedRouletteView: View {
             print("showAlert изменено на \(showAlert)")
         }
     }
+    
     @State private var alertComment: String = ""
     
 
@@ -48,7 +50,7 @@ struct CombinedRouletteView: View {
                     DispatchQueue.main.async {
                         self.alertComment = comment
                     }
-                    self.showAlert = true
+                    self.showAlert = true // не устанавливается в true
                 }
             }
         }
