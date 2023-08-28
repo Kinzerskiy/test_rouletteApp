@@ -34,10 +34,6 @@ class RouletteViewModel: ObservableObject {
     @Published var selectedNumber: Int? = nil
     @Published var selectedBetType: BetType? = nil
     
-    var completion: (Int) -> ()
-    init(completion: @escaping (Int) -> ()) {
-        self.completion = completion
-    }
     
     let wheelOrder: [Int] = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20 , 14, 31, 9, 22, 18, 29, 7, 28,12, 35, 3, 26]
     
@@ -52,12 +48,12 @@ class RouletteViewModel: ObservableObject {
     
     
     
-    func spinWheel() {
+    func spinWheel(completion: @escaping (Int) -> Void) {
         if rotationCount >= maxRotations && activeIndex == finalIndex {
                 spinning = false
                 if let index = finalIndex {
                     let resultingNumber = wheelOrder[index]
-                    self.completion(resultingNumber)
+                    completion(resultingNumber)
                 } else { return }
         }
         
@@ -77,13 +73,13 @@ class RouletteViewModel: ObservableObject {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + totalDuration) {
-                self.spinWheel()
+                self.spinWheel(completion: completion)
             }
         }
         
     }
 
-    func startSpinning() {
+    func startSpinning(completion: @escaping (Int) -> Void) {
         if !spinning {
             if !spinning {
                 spinning = true
@@ -91,7 +87,7 @@ class RouletteViewModel: ObservableObject {
                 maxRotations = Int.random(in: 3...5)
                 finalIndex = Int.random(in: 1...36)
                 activeIndex = Int.random(in: wheelOrder.indices)
-                spinWheel()
+                spinWheel(completion: completion)
                 spinDirection.toggle()
             }
         }

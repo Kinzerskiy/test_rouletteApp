@@ -35,7 +35,7 @@ class BetViewModel: ObservableObject {
     @Published var currentBet: Bet?
     @Published var betAmount: Int?
     
-    var completion: ((Int) -> ())?
+  
 
     func updateBetType(betType: BetType) {
         if currentBet != nil {
@@ -59,15 +59,14 @@ class BetViewModel: ObservableObject {
     
 
     
-    func calculateResult(result: Int) {
+    func calculateResult(result: Int) -> Int{
         defer {
             
             resetBet()
         }
 
         guard let currentBet = currentBet else {
-            completion?(0)
-            return
+        return 0
             }
         
         var winningsOrLosses = 0
@@ -104,7 +103,7 @@ class BetViewModel: ObservableObject {
         case .thirdLine:
             winningsOrLosses = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36].contains(result) ? currentBet.amount * 3 : -currentBet.amount
         }
-        completion?(winningsOrLosses)
+      return winningsOrLosses
     }
     
     

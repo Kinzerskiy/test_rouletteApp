@@ -58,6 +58,6 @@ struct RouletteWheelView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RouletteWheelView(model: RouletteViewModel(completion: {_ in}))
+        RouletteWheelView(model: RouletteViewModel())
     }
 }

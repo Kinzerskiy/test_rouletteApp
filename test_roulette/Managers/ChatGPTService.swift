@@ -16,14 +16,17 @@ class ChatGPTService {
     func fetchComment(for result: Int, completion: @escaping (String) -> Void) {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
-        request.setValue("Bearer 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", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer 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", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         
         let promt = result >= 0 ? "Напишите комментарий с сарказмом для человека, который только что выиграл небольшую сумму в рулетке" : "Напишите комментарий с сарказмом для человека, который только что проиграл небольшую сумму в рулетке"
         
+        let dict: [String: String] = ["role": "system", "content" : promt]
         let requestData: [String: Any] = [
-            "promt": promt,
+            "messages": [
+                dict
+            ],
             "max_tokens": 200,
             "model": "gpt-3.5-turbo",
             "temperature": 0.7,

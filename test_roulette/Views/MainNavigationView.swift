@@ -12,9 +12,13 @@ struct MainNavigationView: View {
     
     @Binding var path: NavigationPath
     
+    init(path:  Binding<NavigationPath>) {
+        _path = path
+    }
+    
     var body: some View {
         TabView{
-            CombinedRouletteView(path: $path, authViewModel: AuthViewModel(), betViewModel: BetViewModel())
+            CombinedRouletteView(path: $path)
                 .tabItem {
                     Label("Game", systemImage: "flag.2.crossed")
                 }

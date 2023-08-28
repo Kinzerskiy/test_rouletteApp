@@ -16,26 +16,33 @@ struct CombinedRouletteView: View {
     
     @Binding var path: NavigationPath
     
-    @State private var showAlert: Bool = false {
-        didSet {
-            print("showAlert изменено на \(showAlert)")
-        }
-    }
+    @State private var showAlert: Bool = false
+    @State private var alertComment: String = "123"
     
-    @State private var alertComment: String = ""
     
 
-    init(path: Binding<NavigationPath>, authViewModel: AuthViewModel, betViewModel: BetViewModel) {
+    init(path: Binding<NavigationPath>) {
            
            _path = path
-           self.authViewModel = authViewModel
-           self.betViewModel = betViewModel
-           self.model = RouletteViewModel(completion: { finalValue in
-               betViewModel.calculateResult(result: finalValue)
-           })
-           
-           self.betViewModel.completion = fetchWinnings
-       }
+           self.authViewModel = AuthViewModel()
+           self.betViewModel = BetViewModel()
+           self.model = RouletteViewModel()
+      
+       
+    }
+    
+    
+    func procced(with value: Int) {
+        let result = betViewModel.calculateResult(result: value)
+        
+        if result > 0 {
+            self.showAlert = true
+            print(self.showAlert)
+        } else {
+            self.showAlert = true
+            print(self.showAlert)
+        }
+    }
 
     func fetchWinnings(winnings: Int) {
             if let user = authViewModel.appUser {
@@ -43,17 +50,18 @@ struct CombinedRouletteView: View {
                 mutableUser.coins += winnings
                 authViewModel.appUser = mutableUser
                 authViewModel.updateUserData(user: mutableUser)
-                
-                ChatGPTService.shared.fetchComment(for: winnings) { comment in
-                    print("Получен комментарий: \(comment)")
+//
+//                ChatGPTService.shared.fetchComment(for: winnings) { comment in
+//                    print("Получен комментарий: \(comment)")
+                  
+//                        self.alertComment
+//                        self.showAlert = true
+                        
                     
-                    DispatchQueue.main.async {
-                        self.alertComment = comment
-                    }
-                    self.showAlert = true // не устанавливается в true
+                 
                 }
             }
-        }
+        
 
     
     var body: some View {
@@ -87,7 +95,9 @@ struct CombinedRouletteView: View {
                         .frame(height: 30)
                     
                     Button(action: {
-                        self.model.startSpinning()
+                        self.model.startSpinning { result in
+                           procced(with: result)
+                        }
                     }) {
                         Text("Start")
                             .padding()
@@ -104,7 +114,8 @@ struct CombinedRouletteView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Результат игры"), message: Text(alertComment), dismissButton: .default(Text("OK")))
             }
-        }
+            }
+        
     }
 }
 
@@ -112,6 +123,6 @@ struct CombinedRouletteView: View {
 
 struct CombinedRouletteView_Previews: PreviewProvider {
     static var previews: some View {
-        CombinedRouletteView(path: .constant(NavigationPath()), authViewModel: AuthViewModel(), betViewModel: BetViewModel())
+        CombinedRouletteView(path: .constant(NavigationPath()))
     }
 }
