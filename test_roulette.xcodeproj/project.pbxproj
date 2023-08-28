@@ -13,7 +13,6 @@
 		8E5D30C42A90CC9C00701A58 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */; };
 		8E69380A2A9257C100CE7972 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6938092A9257C000CE7972 /* MainNavigationView.swift */; };
 		8E69380D2A92627D00CE7972 /* NavigationObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E69380C2A92627C00CE7972 /* NavigationObject.swift */; };
-		8E694EFF2A91006E005537A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */; };
 		8E6CFA1D2A8F5B3800DE93A0 /* RouletteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */; };
 		8E7E64D12A8F5FB9001DE0FC /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */; };
 		8E8274FD2A9968760034E78A /* ChatGPTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8274FC2A9968760034E78A /* ChatGPTService.swift */; };
@@ -31,6 +30,8 @@
 		8EE409CF2A9A3C9100DAF8DA /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE409CE2A9A3C9100DAF8DA /* FirebaseDatabaseSwift */; };
 		8EE409D12A9A3C9100DAF8DA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE409D02A9A3C9100DAF8DA /* FirebaseFirestore */; };
 		8EE409D32A9A3C9100DAF8DA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8EE409D22A9A3C9100DAF8DA /* FirebaseFirestoreSwift */; };
+		8EE409D52A9CA1F800DAF8DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EE409D42A9CA1F800DAF8DA /* GoogleService-Info.plist */; };
+		8EE409D72A9CA20C00DAF8DA /* test-roulette-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EE409D62A9CA20C00DAF8DA /* test-roulette-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +41,6 @@
 		8E5D30C32A90CC9C00701A58 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8E6938092A9257C000CE7972 /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
 		8E69380C2A92627C00CE7972 /* NavigationObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationObject.swift; sourceTree = "<group>"; };
-		8E694EFB2A90F438005537A3 /* test-roulette-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "test-roulette-Info.plist"; sourceTree = SOURCE_ROOT; };
-		8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8E6CFA1C2A8F5B3800DE93A0 /* RouletteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteTableView.swift; sourceTree = "<group>"; };
 		8E7E64D02A8F5FB9001DE0FC /* RouletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewModel.swift; sourceTree = "<group>"; };
 		8E8274FC2A9968760034E78A /* ChatGPTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTService.swift; sourceTree = "<group>"; };
@@ -54,6 +53,8 @@
 		8EB19BE82A8E251D00422FAE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8ECA2D4A2A9329D800910857 /* BetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetView.swift; sourceTree = "<group>"; };
 		8ECA2D4C2A933D4900910857 /* BetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetViewModel.swift; sourceTree = "<group>"; };
+		8EE409D42A9CA1F800DAF8DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8EE409D62A9CA20C00DAF8DA /* test-roulette-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "test-roulette-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +143,8 @@
 		8EB19BE02A8E251700422FAE /* test_roulette */ = {
 			isa = PBXGroup;
 			children = (
-				8E694EFB2A90F438005537A3 /* test-roulette-Info.plist */,
-				8E694EFE2A91006E005537A3 /* GoogleService-Info.plist */,
+				8EE409D42A9CA1F800DAF8DA /* GoogleService-Info.plist */,
+				8EE409D62A9CA20C00DAF8DA /* test-roulette-Info.plist */,
 				8EB19BE12A8E251700422FAE /* test_rouletteApp.swift */,
 				8E5D30C52A90CDBB00701A58 /* Models */,
 				8E5D30BA2A8FC8E100701A58 /* ViewModels */,
@@ -232,9 +233,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE409D72A9CA20C00DAF8DA /* test-roulette-Info.plist in Resources */,
 				8EB19BE92A8E251D00422FAE /* Preview Assets.xcassets in Resources */,
 				8EB19BE62A8E251D00422FAE /* Assets.xcassets in Resources */,
-				8E694EFF2A91006E005537A3 /* GoogleService-Info.plist in Resources */,
+				8EE409D52A9CA1F800DAF8DA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
