@@ -17,9 +17,7 @@ struct CombinedRouletteView: View {
     @Binding var path: NavigationPath
     
     @State private var showAlert: Bool = false
-    @State private var alertComment: String = "123"
-    
-    
+    @State private var alertComment: String = ""
 
     init(path: Binding<NavigationPath>) {
            
@@ -27,40 +25,29 @@ struct CombinedRouletteView: View {
            self.authViewModel = AuthViewModel()
            self.betViewModel = BetViewModel()
            self.model = RouletteViewModel()
-      
-       
     }
     
     
     func procced(with value: Int) {
         let result = betViewModel.calculateResult(result: value)
-        
-        if result > 0 {
-            self.showAlert = true
-            print(self.showAlert)
-        } else {
-            self.showAlert = true
-            print(self.showAlert)
-        }
+        fetchWinnings(winnings: result)
     }
 
     func fetchWinnings(winnings: Int) {
-            if let user = authViewModel.appUser {
-                var mutableUser = user
-                mutableUser.coins += winnings
-                authViewModel.appUser = mutableUser
-                authViewModel.updateUserData(user: mutableUser)
-//
-//                ChatGPTService.shared.fetchComment(for: winnings) { comment in
-//                    print("Получен комментарий: \(comment)")
-                  
-//                        self.alertComment
-//                        self.showAlert = true
-                        
-                    
-                 
-                }
+        if let user = authViewModel.appUser {
+            var mutableUser = user
+            mutableUser.coins += winnings
+            authViewModel.appUser = mutableUser
+            authViewModel.updateUserData(user: mutableUser)
+            
+            ChatGPTService.shared.fetchComment(for: winnings) { comment in
+                DispatchQueue.main.async {
+                               self.alertComment = comment
+                               self.showAlert = true
+                           }
             }
+        }
+    }
         
 
     
@@ -96,7 +83,7 @@ struct CombinedRouletteView: View {
                     
                     Button(action: {
                         self.model.startSpinning { result in
-                           procced(with: result)
+                            self.procced(with: result)
                         }
                     }) {
                         Text("Start")
