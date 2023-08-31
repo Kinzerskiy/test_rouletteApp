@@ -13,6 +13,7 @@ struct RequestData: Codable {
     var messages: [Messages]
     
 }
+
 struct Messages: Codable {
     let role: String
     let content: String
@@ -32,17 +33,17 @@ class ChatGPTService {
         request.httpMethod = "POST"
         
         let prompt: String
-            if result > 0 {
-                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что выиграл небольшую сумму в рулетке"
-            } else if result < 0 {
-                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что проиграл небольшую сумму в рулетке"
-            } else {
-                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что не проиграл и не выиграл в игру рулетка"
-            }
+        if result > 0 {
+            prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что выиграл небольшую сумму в рулетке"
+        } else if result < 0 {
+            prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что проиграл небольшую сумму в рулетке"
+        } else {
+            prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что не проиграл и не выиграл в игру рулетка"
+        }
         
         let message = Messages(role: "user", content: prompt)
         let requestData = RequestData(model: "gpt-3.5-turbo-16k", max_tokens: 150, messages: [message])
-
+        
         
         do {
             let jsonData = try JSONEncoder().encode(requestData)
@@ -53,8 +54,8 @@ class ChatGPTService {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let httpResponse = response as? HTTPURLResponse {
-                  print("HTTP Status Code: \(httpResponse.statusCode)")
-              }
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+            }
             
             guard let data = data, error == nil else {
                 print("Error fetching comment:", error ?? "No data")
@@ -80,7 +81,7 @@ class ChatGPTService {
             } catch let jsonError {
                 print("Failed to serialize JSON:", jsonError)
             }
-           }
-           task.resume()
+        }
+        task.resume()
     }
 }

@@ -19,6 +19,14 @@ struct CombinedRouletteView: View {
     @State private var winnings: Int = 0
     @State private var showAlert: Bool = false
     @State private var alertComment: String = ""
+    var highlightCell: ((Int) -> Void)?
+
+    
+    var isBetComplete: Bool {
+        return betViewModel.currentBet?.amount != nil
+                && betViewModel.currentBet?.amount != 0
+                && betViewModel.currentBet?.betType != nil
+    }
     
     init(path: Binding<NavigationPath>) {
         
@@ -40,6 +48,7 @@ struct CombinedRouletteView: View {
             DispatchQueue.global().async {
                 
                 self.fetchWinnings(winnings: result)
+                
                 group.leave()
             }
             
@@ -51,6 +60,8 @@ struct CombinedRouletteView: View {
                     }
                 }
             }
+        highlightCell?(value)
+       
     }
     
     func fetchWinnings(winnings: Int) {
@@ -70,6 +81,7 @@ struct CombinedRouletteView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                Color(red: 85 / 255, green: 122 / 255, blue: 70 / 255).edgesIgnoringSafeArea(.all)
                 
                 
                 VStack {
@@ -98,32 +110,33 @@ struct CombinedRouletteView: View {
                     }
                     
                     
-                
-                VStack {
-                    Spacer()
-                    Button(action: {
-                        self.model.startSpinning { result in
-                            self.procced(with: result)
+                    
+                    VStack {
+                        Spacer()
+                        Button(action: {
+                            if isBetComplete && authViewModel.appUser?.coins != 0 {
+                                self.model.startSpinning { result in
+                                    self.procced(with: result)
+                                }
+                            }
+                        }) {
+                            Text("SPIN WHEEL!")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(isBetComplete && authViewModel.appUser?.coins != 0 ? Color.red : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
-                    }) {
-                        Text("Start")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                        .disabled(!(isBetComplete && authViewModel.appUser?.coins != 0))
+
+
                     }
+                    .frame(width: 200, height: 165)
                     
-                }
-                .frame(width: 200, height: 165)
                     
-               
                     
             }
-                
                 .position(x: geometry.size.width * 0.6, y: geometry.size.height / 35 - 25)
-                
-               
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Результат игры"), message: Text(alertComment), dismissButton: .default(Text("OK")))

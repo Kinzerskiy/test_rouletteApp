@@ -31,9 +31,10 @@ class RouletteViewModel: ObservableObject {
     @Published var wheelRotation: Double = 0.0
     @Published var spinDirection: SpinDirection = .clockwise
     @Published var isNumberSelected: Bool = false
-    @Published var selectedNumber: Int? = nil
     @Published var selectedBetType: BetType? = nil
-    
+    @Published var highlightedIndex: Int? = nil
+    @Published var playerSelectedNumber: Int? = nil
+    @Published var wheelResultNumber: Int? = nil
     
     let wheelOrder: [Int] = [0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24, 16, 33, 1, 20 , 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26]
     
@@ -47,13 +48,23 @@ class RouletteViewModel: ObservableObject {
     }
     
     
+    func resetHighlightedState() {
+        highlightedIndex = nil
+        wheelResultNumber = nil
+        playerSelectedNumber = nil
+    }
     
     func spinWheel(completion: @escaping (Int) -> Void) {
         if rotationCount >= maxRotations && activeIndex == finalIndex {
                 spinning = false
+                highlightedIndex = finalIndex
                 if let index = finalIndex {
                     let resultingNumber = wheelOrder[index]
+                    wheelResultNumber = resultingNumber
                     completion(resultingNumber)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                        self.resetHighlightedState()
+                                    }
                 } else { return }
         }
         

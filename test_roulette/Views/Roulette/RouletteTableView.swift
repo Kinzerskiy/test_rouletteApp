@@ -11,10 +11,12 @@ struct RouletteTableView: View {
 
     @ObservedObject var model: RouletteViewModel
     @ObservedObject var authViewModel: AuthViewModel
+   
+
+
     
     var betTypeCompletion: (BetType) -> ()
    
-  
     var body: some View {
         VStack(spacing: 1) {
             mainBoard
@@ -36,48 +38,50 @@ struct RouletteTableView: View {
             
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
             .foregroundColor(model.color(for: 0))
-            .opacity(model.selectedNumber == 0 ? 0.5 : 1)
+            .opacity(model.playerSelectedNumber == 0 ? 0.5 : 1)
             .onTapGesture {
                 self.betTypeCompletion(.number(0))
                 model.selectedBetType = nil
-                   if model.selectedNumber == 0 {
-                       model.selectedNumber = nil
+                   if model.playerSelectedNumber == 0 {
+                       model.playerSelectedNumber = nil
                    } else {
-                       model.selectedNumber = 0
+                       model.playerSelectedNumber = 0
                    }
             }
     }
     
     var numbersBoard: some View {
-        VStack(spacing: 1) {
-            ForEach((1..<4).reversed(), id: \.self) { rowIndex in
-                HStack(spacing: 1) {
-                    ForEach(1..<13) { columnIndex in
-                        let number = (columnIndex - 1) * 3 + rowIndex
-                        
-                        Rectangle()
-                            .frame(width: 40, height: 40)
-                            .foregroundColor(model.color(for: number))
-                            .opacity(model.selectedNumber == number ? 0.5 : 1.0)
-                            .overlay(Text("\(number)")).foregroundColor(.white)
-                            .onTapGesture {
+           VStack(spacing: 1) {
+               ForEach((1..<4).reversed(), id: \.self) { rowIndex in
+                   HStack(spacing: 1) {
+                       ForEach(1..<13) { columnIndex in
+                           let number = (columnIndex - 1) * 3 + rowIndex
                            
-                                model.selectedBetType = .number(number)
-                                self.betTypeCompletion(.number(number))
-                                
-                                if model.selectedNumber == number {
-                                    model.selectedNumber = nil
-                                    model.isNumberSelected = false
-                                } else {
-                                    model.isNumberSelected = true
-                                    model.selectedNumber = number
-                                }
-                            }
-                    }
-                }
-            }
-        }
-    }
+                           Rectangle()
+                               .frame(width: 40, height: 40)
+                               .foregroundColor(model.color(for: number))
+                               .opacity(
+                                   (model.highlightedIndex != nil && model.wheelOrder[model.highlightedIndex!] == number) ? 0.5 :
+                                   (model.playerSelectedNumber == number || model.wheelResultNumber == number) ? 0.5 : 1.0
+                               )
+                               .overlay(Text("\(number)")).foregroundColor(.white)
+                               .onTapGesture {
+                                   model.selectedBetType = .number(number)
+                                   self.betTypeCompletion(.number(number))
+                                   
+                                   if model.playerSelectedNumber == number || model.wheelResultNumber == number {
+                                       model.playerSelectedNumber = nil
+                                       model.isNumberSelected = false
+                                   } else {
+                                       model.playerSelectedNumber = number
+                                       model.isNumberSelected = true
+                                   }
+                               }
+                       }
+                   }
+               }
+           }
+       }
     
     var sideCells: some View {
         VStack(spacing: 1) {
@@ -88,7 +92,7 @@ struct RouletteTableView: View {
                     .overlay(Text("2 - 1").foregroundColor(.white))
                 
                     .onTapGesture {
-                        model.selectedNumber = nil
+                        model.playerSelectedNumber = nil
                         model.selectedBetType = nil
                         self.betTypeCompletion([.firstLine, .secondLine, .thirdLine][index - 1] )
 
@@ -115,7 +119,7 @@ struct RouletteTableView: View {
                             )
                             .onTapGesture {
                                 self.betTypeCompletion([.firstThird, .secondThird, .thirdThird][index])
-                                model.selectedNumber = nil
+                                model.playerSelectedNumber = nil
                                 model.selectedBetType = nil
                               
                                 model.selectBetType([.firstThird, .secondThird, .thirdThird][index])
@@ -135,7 +139,7 @@ struct RouletteTableView: View {
                             )
                             .onTapGesture {
                                 self.betTypeCompletion([.oneEighteen, .even, .red, .black, .odd, .nineghtingThirtySix][index])
-                                model.selectedNumber = nil
+                                model.playerSelectedNumber = nil
                                 model.selectedBetType = nil
                             
                                 model.selectBetType([.oneEighteen, .even, .red, .black, .odd, .nineghtingThirtySix][index])

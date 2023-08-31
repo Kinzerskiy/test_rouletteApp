@@ -34,6 +34,7 @@ class BetViewModel: ObservableObject {
     
     @Published var currentBet: Bet?
     @Published var betAmount: Int?
+  
     
   
 
@@ -105,6 +106,4 @@ class BetViewModel: ObservableObject {
         }
       return winningsOrLosses
     }
-    
-    
 }
