@@ -31,7 +31,14 @@ class ChatGPTService {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         
-        let prompt = result >= 0 ? "Напишите комментарий с сарказмом для человека, который только что выиграл небольшую сумму в рулетке" : "Напишите комментарий с сарказмом для человека, который только что проиграл небольшую сумму в рулетке"
+        let prompt: String
+            if result > 0 {
+                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что выиграл небольшую сумму в рулетке"
+            } else if result < 0 {
+                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что проиграл небольшую сумму в рулетке"
+            } else {
+                prompt = "Напишите небольшой комментарий до 100 символов с сарказмом для человека, который только что не проиграл и не выиграл в игру рулетка"
+            }
         
         let message = Messages(role: "user", content: prompt)
         let requestData = RequestData(model: "gpt-3.5-turbo-16k", max_tokens: 150, messages: [message])

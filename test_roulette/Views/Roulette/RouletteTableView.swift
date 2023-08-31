@@ -35,11 +35,16 @@ struct RouletteTableView: View {
             .frame(width: 40, height: 122)
             
             .overlay(Text("0").foregroundColor(model.activeIndex == 0 ? .black : .white))
-            .foregroundColor(model.selectedBetType == .number(0) ? .gray : model.color(for: 0))
+            .foregroundColor(model.color(for: 0))
+            .opacity(model.selectedNumber == 0 ? 0.5 : 1)
             .onTapGesture {
                 self.betTypeCompletion(.number(0))
                 model.selectedBetType = nil
-            
+                   if model.selectedNumber == 0 {
+                       model.selectedNumber = nil
+                   } else {
+                       model.selectedNumber = 0
+                   }
             }
     }
     
@@ -55,9 +60,6 @@ struct RouletteTableView: View {
                             .foregroundColor(model.color(for: number))
                             .opacity(model.selectedNumber == number ? 0.5 : 1.0)
                             .overlay(Text("\(number)")).foregroundColor(.white)
-                        
-                        
-                        
                             .onTapGesture {
                            
                                 model.selectedBetType = .number(number)
@@ -126,17 +128,17 @@ struct RouletteTableView: View {
                         Rectangle()
                             .frame(width: (40 * 12 + 7) / 6, height: 40)
                             
-                            .foregroundColor(model.selectedBetType == [.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index] ? .red : .gray)
+                            .foregroundColor(model.selectedBetType == [.oneEighteen, .even, .red, .black, .odd, .nineghtingThirtySix][index] ? .red : .gray)
                             .overlay(
                                 Text(lowerSectionText(for: index))
                                     .foregroundColor(.white)
                             )
                             .onTapGesture {
-                                self.betTypeCompletion([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
+                                self.betTypeCompletion([.oneEighteen, .even, .red, .black, .odd, .nineghtingThirtySix][index])
                                 model.selectedNumber = nil
                                 model.selectedBetType = nil
                             
-                                model.selectBetType([.oneEighteen, .nineghtingThirtySix, .odd, .even, .red, .black][index])
+                                model.selectBetType([.oneEighteen, .even, .red, .black, .odd, .nineghtingThirtySix][index])
                             }
                     }
                 }

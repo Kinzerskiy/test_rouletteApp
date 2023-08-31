@@ -74,7 +74,7 @@ class BetViewModel: ObservableObject {
         switch currentBet.betType {
         case .number(let number):
             if number == result {
-                winningsOrLosses = currentBet.amount * 35
+                winningsOrLosses = currentBet.amount * 35 + currentBet.amount
             } else {
                 winningsOrLosses = -currentBet.amount
             }
